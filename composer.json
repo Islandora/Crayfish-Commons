@@ -20,7 +20,13 @@
     "authors": [
         {
             "name": "Islandora Foundation",
-            "email": "community@islandora.ca"
+            "email": "community@islandora.ca",
+            "role": "Owner"
+        },
+        {
+            "name": "Daniel Lamb",
+            "email": "dlamb@islandora.ca",
+            "role": "Maintainer"
         }
     ]
 }
