@@ -1,7 +1,7 @@
 #!/bin/bash
 
 RETURN=0
-FILES=`find -L $1 -name "*"`
+FILES=`find $1 -type f -name "*" ! -path "$1/vendor/*" ! -path "$1/.git/*"`
 echo "Testing for files with DOS line endings..."
 for FILE in $FILES
 do
