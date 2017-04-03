@@ -49,3 +49,4 @@ an Islandora Foundation [Contributor License Agreement][6] or
 [7]: http://islandora.ca/sites/default/files/islandora_ccla.pdf
 [8]: http://islandora.ca/resources/contributors
 
+
