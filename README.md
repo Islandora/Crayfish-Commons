@@ -1,7 +1,7 @@
 # Crayfish Commons
 
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%205.6-8892BF.svg?style=flat-square)](https://php.net/)
-[![Build Status](https://travis-ci.org/Islandora-CLAW/Crayfish-Commons.svg?branch=master)](https://travis-ci.org/Islandora-CLAW/Crayfish)
+[![Build Status](https://travis-ci.org/Islandora-CLAW/Crayfish-Commons.svg?branch=master)](https://travis-ci.org/Islandora-CLAW/Crayfish-Commons)
 [![Contribution Guidelines](http://img.shields.io/badge/CONTRIBUTING-Guidelines-blue.svg)](./CONTRIBUTING.md)
 [![LICENSE](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](./LICENSE)
 
