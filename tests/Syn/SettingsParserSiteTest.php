@@ -102,7 +102,7 @@ STRING;
     public function testOneSiteHmacFileKey()
     {
         $dir = vfsStream::setup()->url();
-        $file = tempnam($dir, 'testing');
+        $file = $dir . DIRECTORY_SEPARATOR . "test";
         file_put_contents($file, 'lulz');
 
         $testXml =  <<<STRING
