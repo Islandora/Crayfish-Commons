@@ -24,7 +24,7 @@ class PathMapperTest extends \PHPUnit_Framework_TestCase
 
         $result = $path_mapper->getFedoraPath("bar");
         $this->assertTrue(
-             $result == 'foo',
+            $result == 'foo',
             "Expected 'foo', received $result"
         );
     }
@@ -44,7 +44,7 @@ class PathMapperTest extends \PHPUnit_Framework_TestCase
 
         $result = $path_mapper->getFedoraPath("foo");
         $this->assertTrue(
-             $result === null,
+            $result === null,
             "Expected null, received $result"
         );
     }
@@ -89,4 +89,3 @@ class PathMapperTest extends \PHPUnit_Framework_TestCase
         );
     }
 }
-
