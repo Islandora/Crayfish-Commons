@@ -22,8 +22,7 @@ install:
 
 script:
   - $SCRIPT_DIR/line_endings.sh $TRAVIS_BUILD_DIR
-  - vendor/bin/phpcs --standard=PSR2 src
-  - vendor/bin/phpcpd --names *.php src
+  - composer test
 
 notifications:
   irc:

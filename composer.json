@@ -18,6 +18,15 @@
             "Islandora\\Crayfish\\Commons\\": "src/"
         }
     },
+    "scripts": {
+        "check": [
+            "phpcs --standard=PSR2 src",
+            "phpcpd --names *.php src"
+        ],
+        "test": [
+            "@check"
+        ]
+    },
     "license": "MIT",
     "authors": [
         {
