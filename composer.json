@@ -3,9 +3,10 @@
     "description": "Shared code amongst Islandora Crayfish microservices",
     "type": "library",
     "require": {
-        "islandora/chullo": "^0.0.8",
+        "islandora/chullo": "^0.1.1",
         "symfony/http-foundation": "3.2.6",
-        "psr/log": "^1.0.1"
+        "psr/log": "^1.0.1",
+        "doctrine/dbal": "~2.2"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.0",

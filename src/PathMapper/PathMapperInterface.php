@@ -3,7 +3,7 @@
 namespace Islandora\Crayfish\Commons\PathMapper;
 
 /**
- * Interface GeminiServiceInterface
+ * Interface PathMapperInterface
  * @package Islandora\Crayfish\Commons
  */
 interface PathMapperInterface

@@ -5,7 +5,7 @@ namespace Islandora\Crayfish\Commons\PathMapper;
 use Doctrine\DBAL\Connection;
 
 /**
- * Class GeminiService
+ * Class PathMapper
  * @package Islandora\Crayfish\Commons
  */
 class PathMapper implements PathMapperInterface
@@ -17,7 +17,7 @@ class PathMapper implements PathMapperInterface
     protected $connection;
 
     /**
-     * GeminiService constructor.
+     * PathMapper constructor.
      * @param \Doctrine\DBAL\Connection $connection
      */
     public function __construct(Connection $connection)
