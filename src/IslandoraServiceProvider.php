@@ -39,7 +39,6 @@ class IslandoraServiceProvider implements ServiceProviderInterface
             $app->register(new MonologServiceProvider(), [
                 'monolog.logfile' => $config['logfile'],
                 'monolog.level' => $config['loglevel'],
-                'monolog.name' => 'Houdini',
             ]);
         }
 
