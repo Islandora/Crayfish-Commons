@@ -6,6 +6,7 @@ use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Monolog\Logger;
 use Monolog\Handler\NullHandler;
+use Silex\Provider\DoctrineServiceProvider;
 use Silex\Provider\MonologServiceProvider;
 use Silex\Provider\ServiceControllerServiceProvider;
 use Silex\Provider\SecurityServiceProvider;
@@ -43,6 +44,13 @@ class IslandoraServiceProvider implements ServiceProviderInterface
         }
 
         $app->register(new ServiceControllerServiceProvider());
+
+        if (isset($config['db.options'])) {
+            $app->register(
+                new DoctrineServiceProvider(),
+                ['db.options' => $config['db.options']]
+            );
+        }
 
         $app['crayfish.cmd_execute_service'] = function ($app) {
             return new CmdExecuteService(
