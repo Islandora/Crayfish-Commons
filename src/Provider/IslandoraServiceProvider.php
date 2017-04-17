@@ -1,11 +1,11 @@
 <?php
 
-namespace Islandora\Crayfish\Commons;
+namespace Islandora\Crayfish\Commons\Provider;
 
+use Islandora\Crayfish\Commons\CmdExecuteService;
+use Islandora\Crayfish\Commons\FedoraResourceConverter;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
-use Monolog\Logger;
-use Monolog\Handler\NullHandler;
 use Silex\Provider\MonologServiceProvider;
 use Silex\Provider\ServiceControllerServiceProvider;
 use Silex\Provider\SecurityServiceProvider;
@@ -16,75 +16,76 @@ use Islandora\Crayfish\Commons\Syn\JwtFactory;
 
 class IslandoraServiceProvider implements ServiceProviderInterface
 {
-    protected $config;
-
-    public function __construct($config)
-    {
-        $this->config = $config;
-    }
-
     /**
      * @inheritDoc
      */
-    public function register(Container $app)
+    public function register(Container $container)
     {
-        $config = $this->config;
+        // Register services we rely on
+        $container->register(new MonologServiceProvider());
+        $container->register(new ServiceControllerServiceProvider());
+        $container->register(new SecurityServiceProvider());
 
-        // Only use logger if configured
-        if (strtolower($config['loglevel']) === 'none') {
-            $app['monolog'] = function () {
-                return new Logger('null', [new NullHandler()]);
-            };
-        } else {
-            $app->register(new MonologServiceProvider(), [
-                'monolog.logfile' => $config['logfile'],
-                'monolog.level' => $config['loglevel'],
-            ]);
-        }
+        // Configure external services
+        $container['monolog.logfile'] = function ($container) {
+            return strtolower($container['crayfish.log.level']) == 'none' ? null : $container['crayfish.log.file'];
+        };
+        $container['monolog.level'] = function ($container) {
+            return $container['crayfish.log.level'];
+        };
 
-        $app->register(new ServiceControllerServiceProvider());
+        $container['security.firewalls'] = function ($container) {
+            if ($container['crayfish.security.enable']) {
+                return [
+                    'default' => [
+                        'stateless' => true,
+                        'anonymous' => false,
+                        'guard' => [
+                            'authenticators' => [
+                                'crayfish.syn.jwt_authentication'
+                            ],
+                        ],
+                    ],
+                ];
+            } else {
+                return [];
+            }
+        };
 
-        $app['crayfish.cmd_execute_service'] = function ($app) {
+        // Register our services
+        $container['crayfish.cmd_execute_service'] = function ($container) {
             return new CmdExecuteService(
-                $app['monolog']->withName('crayfish.cmd_execute_service')
+                $container['monolog']->withName('crayfish.cmd_execute_service')
             );
         };
 
-        $app['crayfish.fedora_resource'] = function () use ($config) {
+        $container['crayfish.fedora_resource'] = function ($container) {
             return new FedoraResourceConverter(
-                FedoraApi::create($config['fedora base url'])
+                FedoraApi::create($container['crayfish.fedora.base_url'])
             );
         };
 
-        $app['crayfish.syn.settings_parser'] = function ($app) use ($config) {
-            $xml = file_get_contents($config['security config']);
+        $container['crayfish.syn.settings_parser'] = function ($container) {
+            if (file_exists($container['crayfish.security.config'])) {
+                $xml = file_get_contents($container['crayfish.security.config']);
+            } else {
+                $xml = '';
+                $container['monolog']
+                    ->error("Securty configuration not found. ${container['crayfish.security.config']}");
+            }
+
             return new SettingsParser(
                 $xml,
-                $app['monolog']->withName('crayfish.syn.settings_parser')
+                $container['monolog']->withName('crayfish.syn.settings_parser')
             );
         };
 
-        $app['crayfish.syn.jwt_authentication'] = function ($app) {
+        $container['crayfish.syn.jwt_authentication'] = function ($app) {
             return new JwtAuthenticator(
                 $app['crayfish.syn.settings_parser'],
                 new JwtFactory(),
                 $app['monolog']->withName('crayfish.syn.jwt_authentication')
             );
         };
-
-        if ($config['security enabled']) {
-            $app->register(new SecurityServiceProvider());
-            $app['security.firewalls'] = [
-                'default' => [
-                    'stateless' => true,
-                    'anonymous' => false,
-                    'guard' => [
-                        'authenticators' => [
-                            'crayfish.syn.jwt_authentication'
-                        ],
-                    ],
-                ],
-            ];
-        }
     }
 }
