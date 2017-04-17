@@ -2,6 +2,7 @@
 
 namespace Islandora\Crayfish\Commons\Syn\tests;
 
+use Doctrine\DBAL\Connection;
 use Islandora\Crayfish\Commons\CmdExecuteService;
 use Islandora\Crayfish\Commons\FedoraResourceConverter;
 use Islandora\Crayfish\Commons\Provider\IslandoraServiceProvider;
@@ -28,6 +29,14 @@ class IslandoraServiceProviderTest extends PHPUnit_Framework_TestCase
         $this->container['crayfish.log.file'] = 'test';
         $this->container['crayfish.log.level'] = 'debug';
         $this->assertInstanceOf(Logger::class, $this->container['monolog']);
+    }
+
+    public function testDoctrine()
+    {
+        // doctrine uses logger
+        $this->container['crayfish.log.level'] = 'none';
+
+        $this->assertInstanceOf(Connection::class, $this->container['db']);
     }
 
     public function testSecurityEnable()

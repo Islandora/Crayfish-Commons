@@ -55,14 +55,32 @@ class IslandoraServiceProvider implements ServiceProviderInterface
         };
 
         $container['db.options'] = function ($container) {
-            return [
-                'driver'   => $container['crayfish.db.driver'],
-                'host'     => $container['crayfish.db.host'],
-                'port'     => $container['crayfish.db.port'],
-                'dbname'   => $container['crayfish.db.dbname'],
-                'user'     => $container['crayfish.db.user'],
-                'password' => $container['crayfish.db.password'],
-            ];
+            $settings = [];
+            if (isset($container['crayfish.db.driver'])) {
+                $settings['driver'] = $container['crayfish.db.driver'];
+            }
+            if (isset($container['crayfish.db.host'])) {
+                $settings['host'] = $container['crayfish.db.host'];
+            }
+            if (isset($container['crayfish.db.port'])) {
+                $settings['port'] = $container['crayfish.db.port'];
+            }
+            if (isset($container['crayfish.db.dbname'])) {
+                $settings['dbname'] = $container['crayfish.db.dbname'];
+            }
+            if (isset($container['crayfish.db.user'])) {
+                $settings['user'] = $container['crayfish.db.user'];
+            }
+            if (isset($container['crayfish.db.password'])) {
+                $settings['password'] = $container['crayfish.db.password'];
+            }
+            if (isset($container['crayfish.db.charset'])) {
+                $settings['charset'] = $container['crayfish.db.charset'];
+            }
+            if (isset($container['crayfish.db.path'])) {
+                $settings['path'] = $container['crayfish.db.path'];
+            }
+            return $settings;
         };
 
         // Register our services
