@@ -45,12 +45,14 @@ class SettingsParser
         $this->xml = simplexml_load_string($xml);
         $this->valid = true;
 
-        if ($this->xml->getName() != 'sites') {
+        if (!$this->xml || $this->xml->getName() != 'sites') {
             $this->valid = false;
+            return;
         }
 
-        if ($this->xml['version'] != '1') {
+        if (!$this->xml || $this->xml['version'] != '1') {
             $this->valid = false;
+            return;
         }
     }
 
