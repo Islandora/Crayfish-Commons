@@ -256,4 +256,25 @@ STRING;
         $sites = $parser->getSites();
         $this->assertEquals(0, count($sites));
     }
+
+    public function testEmptyString()
+    {
+        $testXml =  <<<STRING
+STRING;
+        $logger = $this->prophesize(AbstractLogger::class)->reveal();
+        $parser = new SettingsParser($testXml, $logger);
+        $sites = $parser->getSites();
+        $this->assertEquals(0, count($sites));
+    }
+
+    public function testIncorrectTags()
+    {
+        $testXml =  <<<STRING
+<foo></foo>
+STRING;
+        $logger = $this->prophesize(AbstractLogger::class)->reveal();
+        $parser = new SettingsParser($testXml, $logger);
+        $sites = $parser->getSites();
+        $this->assertEquals(0, count($sites));
+    }
 }
