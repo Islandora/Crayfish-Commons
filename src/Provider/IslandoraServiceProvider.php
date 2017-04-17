@@ -37,7 +37,7 @@ class IslandoraServiceProvider implements ServiceProviderInterface
         };
 
         $container['security.firewalls'] = function ($container) {
-            if ($container['crayfish.security.enable']) {
+            if ($container['crayfish.syn.enable']) {
                 return [
                     'default' => [
                         'stateless' => true,
@@ -74,17 +74,17 @@ class IslandoraServiceProvider implements ServiceProviderInterface
 
         $container['crayfish.fedora_resource'] = function ($container) {
             return new FedoraResourceConverter(
-                FedoraApi::create($container['crayfish.fedora.base_url'])
+                FedoraApi::create($container['crayfish.fedora_resource.base_url'])
             );
         };
 
         $container['crayfish.syn.settings_parser'] = function ($container) {
-            if (file_exists($container['crayfish.security.config'])) {
-                $xml = file_get_contents($container['crayfish.security.config']);
+            if (file_exists($container['crayfish.syn.config'])) {
+                $xml = file_get_contents($container['crayfish.syn.config']);
             } else {
                 $xml = '';
                 $container['monolog']
-                    ->error("Securty configuration not found. ${container['crayfish.security.config']}");
+                    ->error("Securty configuration not found. ${container['crayfish.syn.config']}");
             }
 
             return new SettingsParser(
