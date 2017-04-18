@@ -54,34 +54,7 @@ class IslandoraServiceProvider implements ServiceProviderInterface
             }
         };
 
-        $container['db.options'] = function ($container) {
-            $settings = [];
-            if (isset($container['crayfish.db.driver'])) {
-                $settings['driver'] = $container['crayfish.db.driver'];
-            }
-            if (isset($container['crayfish.db.host'])) {
-                $settings['host'] = $container['crayfish.db.host'];
-            }
-            if (isset($container['crayfish.db.port'])) {
-                $settings['port'] = $container['crayfish.db.port'];
-            }
-            if (isset($container['crayfish.db.dbname'])) {
-                $settings['dbname'] = $container['crayfish.db.dbname'];
-            }
-            if (isset($container['crayfish.db.user'])) {
-                $settings['user'] = $container['crayfish.db.user'];
-            }
-            if (isset($container['crayfish.db.password'])) {
-                $settings['password'] = $container['crayfish.db.password'];
-            }
-            if (isset($container['crayfish.db.charset'])) {
-                $settings['charset'] = $container['crayfish.db.charset'];
-            }
-            if (isset($container['crayfish.db.path'])) {
-                $settings['path'] = $container['crayfish.db.path'];
-            }
-            return $settings;
-        };
+        $this->registerDbOptions($container);
 
         // Register our services
         $container['crayfish.cmd_execute_service'] = function ($container) {
@@ -117,6 +90,29 @@ class IslandoraServiceProvider implements ServiceProviderInterface
                 new JwtFactory(),
                 $app['monolog']->withName('crayfish.syn.jwt_authentication')
             );
+        };
+    }
+
+    protected function registerDbOptions($container)
+    {
+        $container['db.options'] = function ($container) {
+            $setoption = function (&$settings, $container, $name) {
+                if (isset($container["crayfish.db.options.$name"])) {
+                    $settings[$name] = $container["crayfish.db.options.$name"];
+                }
+            };
+
+            $settings = [];
+            $setoption($settings, $container, 'host');
+            $setoption($settings, $container, 'port');
+            $setoption($settings, $container, 'dbname');
+            $setoption($settings, $container, 'user');
+            $setoption($settings, $container, 'password');
+            $setoption($settings, $container, 'charset');
+            $setoption($settings, $container, 'path');
+            $setoption($settings, $container, 'url');
+
+            return $settings;
         };
     }
 }
