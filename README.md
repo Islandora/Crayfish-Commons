@@ -4,6 +4,7 @@
 [![Build Status](https://travis-ci.org/Islandora-CLAW/Crayfish-Commons.svg?branch=master)](https://travis-ci.org/Islandora-CLAW/Crayfish-Commons)
 [![Contribution Guidelines](http://img.shields.io/badge/CONTRIBUTING-Guidelines-blue.svg)](./CONTRIBUTING.md)
 [![LICENSE](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](./LICENSE)
+[![codecov](https://codecov.io/gh/Islandora-CLAW/Crayfish-Commons/branch/master/graph/badge.svg)](https://codecov.io/gh/Islandora-CLAW/Crayfish-Commons)
 
 Crayfish Commons is a library housing shared code for Crayfish microservices.
 
