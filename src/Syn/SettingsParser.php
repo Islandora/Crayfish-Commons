@@ -45,7 +45,7 @@ class SettingsParser
         $this->xml = simplexml_load_string($xml);
         $this->valid = true;
 
-        if (!$this->xml || $this->xml->getName() != 'sites') {
+        if (!$this->xml || $this->xml->getName() != 'config') {
             $this->valid = false;
             return;
         }
@@ -196,7 +196,7 @@ class SettingsParser
      * Get an array of sites from the configuration file.
      *
      * @return array
-     *   Each sites is keyed with its url. Each sites array contains:
+     *   Each site is keyed with its url. Each sites array contains:
      *   - algorithm
      *   - key
      *   - url
