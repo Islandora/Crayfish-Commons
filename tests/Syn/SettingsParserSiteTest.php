@@ -12,11 +12,11 @@ class SettingsParserSiteTest extends \PHPUnit_Framework_TestCase
     public function testInvalidVersion()
     {
         $testXml =  <<<STRING
-<sites version='2'>
+<config version='2'>
   <site url='http://test.com' algorithm='HS384' encoding='plain'>
     Its always sunny in Charlottetown
   </site>
-</sites>
+</config>
 STRING;
         $logger = $this->prophesize(AbstractLogger::class)->reveal();
         $parser = new SettingsParser($testXml, $logger);
@@ -27,11 +27,11 @@ STRING;
     public function hmacHelper($algorithm)
     {
         $testXml =  <<<STRING
-<sites version='1'>
+<config version='1'>
   <site url='http://test.com' algorithm='$algorithm' encoding='plain'>
     Its always sunny in Charlottetown
   </site>
-</sites>
+</config>
 STRING;
         $logger = $this->prophesize(AbstractLogger::class)->reveal();
         $parser = new SettingsParser($testXml, $logger);
@@ -53,11 +53,11 @@ STRING;
     public function testOneSiteHmacBase64()
     {
         $testXml =  <<<STRING
-<sites version='1'>
+<config version='1'>
   <site url='http://test.com' algorithm='HS256' encoding='base64'>
     RG8geW91IHNlZSB0aGF0IGRvb3IgbWFya2VkIHBpcmF0ZT8=
   </site>
-</sites>
+</config>
 STRING;
         $logger = $this->prophesize(AbstractLogger::class)->reveal();
         $parser = new SettingsParser($testXml, $logger);
@@ -72,11 +72,11 @@ STRING;
     public function testOneSiteHmacInvalidBase64()
     {
         $testXml =  <<<STRING
-<sites version='1'>
+<config version='1'>
   <site url='http://test.com' algorithm='HS256' encoding='base64'>
     I am invalid!
   </site>
-</sites>
+</config>
 STRING;
         $logger = $this->prophesize(AbstractLogger::class)->reveal();
         $parser = new SettingsParser($testXml, $logger);
@@ -87,11 +87,11 @@ STRING;
     public function testOneSiteHmacInvalidEncoding()
     {
         $testXml =  <<<STRING
-<sites version='1'>
+<config version='1'>
   <site url='http://test.com' algorithm='HS256' encoding='greenman'>
     RG8geW91IHNlZSB0aGF0IGRvb3IgbWFya2VkIHBpcmF0ZT8=
   </site>
-</sites>
+</config>
 STRING;
         $logger = $this->prophesize(AbstractLogger::class)->reveal();
         $parser = new SettingsParser($testXml, $logger);
@@ -106,9 +106,9 @@ STRING;
         file_put_contents($file, 'lulz');
 
         $testXml =  <<<STRING
-<sites version='1'>
+<config version='1'>
   <site url='http://test.com' algorithm='HS256' encoding='plain' path="$file"/>
-</sites>
+</config>
 STRING;
         $logger = $this->prophesize(AbstractLogger::class)->reveal();
         $parser = new SettingsParser($testXml, $logger);
@@ -124,9 +124,9 @@ STRING;
         $file = '/does/not/exist';
 
         $testXml =  <<<STRING
-<sites version='1'>
+<config version='1'>
   <site url='http://test.com' algorithm='HS256' encoding='plain' path="$file"/>
-</sites>
+</config>
 STRING;
         $logger = $this->prophesize(AbstractLogger::class)->reveal();
         $parser = new SettingsParser($testXml, $logger);
@@ -137,9 +137,9 @@ STRING;
     public function testNoKeyOrPath()
     {
         $testXml =  <<<STRING
-<sites version='1'>
+<config version='1'>
   <site url='http://test.com' algorithm='HS256' encoding='plain'/>
-</sites>
+</config>
 STRING;
         $logger = $this->prophesize(AbstractLogger::class)->reveal();
         $parser = new SettingsParser($testXml, $logger);
@@ -150,11 +150,11 @@ STRING;
     public function testNoUrl()
     {
         $testXml =  <<<STRING
-<sites version='1'>
+<config version='1'>
   <site algorithm='HS256' encoding='plain'>
     foo
   </site>
-</sites>
+</config>
 STRING;
         $logger = $this->prophesize(AbstractLogger::class)->reveal();
         $parser = new SettingsParser($testXml, $logger);
@@ -165,11 +165,11 @@ STRING;
     public function testNoUrlDefault()
     {
         $testXml =  <<<STRING
-<sites version='1'>
+<config version='1'>
   <site algorithm='HS256' encoding='plain' default="true">
     foo
   </site>
-</sites>
+</config>
 STRING;
         $logger = $this->prophesize(AbstractLogger::class)->reveal();
         $parser = new SettingsParser($testXml, $logger);
@@ -180,11 +180,11 @@ STRING;
     public function testNoUrlNotDefault()
     {
         $testXml =  <<<STRING
-<sites version='1'>
+<config version='1'>
   <site algorithm='HS256' encoding='plain' default="false">
     foo
   </site>
-</sites>
+</config>
 STRING;
         $logger = $this->prophesize(AbstractLogger::class)->reveal();
         $parser = new SettingsParser($testXml, $logger);
@@ -195,7 +195,7 @@ STRING;
     public function rsaHelper($algorithm)
     {
         $testXml =  <<<STRING
-<sites version='1'>
+<config version='1'>
   <site url='http://test.com' algorithm='$algorithm' encoding='PEM'>
 -----BEGIN PUBLIC KEY-----
 MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDEVO4MNlZG+iGYhoJd/cBpfMd9
@@ -204,7 +204,7 @@ t176OLYkNoTI9LNf6z4wuBenrlQ/H5UnYl6h5QoOdVpNAgEjkDcdTSOE1lqFLIle
 KOT4nEF7MBGyOSP3KQIDAQAB
 -----END PUBLIC KEY-----
   </site>
-</sites>
+</config>
 STRING;
         $logger = $this->prophesize(AbstractLogger::class)->reveal();
         $parser = new SettingsParser($testXml, $logger);
@@ -225,11 +225,11 @@ STRING;
     public function testRsaNotRealKey()
     {
         $testXml =  <<<STRING
-<sites version='1'>
+<config version='1'>
   <site url='http://test.com' algorithm='RS256' encoding='PEM'>
     fake key!
   </site>
-</sites>
+</config>
 STRING;
         $logger = $this->prophesize(AbstractLogger::class)->reveal();
         $parser = new SettingsParser($testXml, $logger);
@@ -240,7 +240,7 @@ STRING;
     public function testRsaBadEncoding()
     {
         $testXml =  <<<STRING
-<sites version='1'>
+<config version='1'>
   <site url='http://test.com' algorithm='RS256' encoding='DER'>
 -----BEGIN PUBLIC KEY-----
 MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDEVO4MNlZG+iGYhoJd/cBpfMd9
@@ -249,7 +249,7 @@ t176OLYkNoTI9LNf6z4wuBenrlQ/H5UnYl6h5QoOdVpNAgEjkDcdTSOE1lqFLIle
 KOT4nEF7MBGyOSP3KQIDAQAB
 -----END PUBLIC KEY-----
   </site>
-</sites>
+</config>
 STRING;
         $logger = $this->prophesize(AbstractLogger::class)->reveal();
         $parser = new SettingsParser($testXml, $logger);

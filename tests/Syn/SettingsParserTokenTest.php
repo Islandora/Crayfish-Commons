@@ -11,11 +11,11 @@ class SettingsParserTokenTest extends \PHPUnit_Framework_TestCase
     public function testInvalidVersion()
     {
         $testXml =  <<<STRING
-<sites version='2'>
+<config version='2'>
   <token>
     c00lpazzward
   </token>
-</sites>
+</config>
 STRING;
         $logger = $this->prophesize(AbstractLogger::class)->reveal();
         $parser = new SettingsParser($testXml, $logger);
@@ -26,11 +26,11 @@ STRING;
     public function testTokenNoParams()
     {
         $testXml =  <<<STRING
-<sites version='1'>
+<config version='1'>
   <token>
     c00lpazzward
   </token>
-</sites>
+</config>
 STRING;
         $logger = $this->prophesize(AbstractLogger::class)->reveal();
         $parser = new SettingsParser($testXml, $logger);
@@ -46,11 +46,11 @@ STRING;
     public function testTokenUser()
     {
         $testXml =  <<<STRING
-<sites version='1'>
+<config version='1'>
   <token user="dennis">
     c00lpazzward
   </token>
-</sites>
+</config>
 STRING;
         $logger = $this->prophesize(AbstractLogger::class)->reveal();
         $parser = new SettingsParser($testXml, $logger);
@@ -65,11 +65,11 @@ STRING;
     public function testTokenRole()
     {
         $testXml =  <<<STRING
-<sites version='1'>
+<config version='1'>
   <token roles="dennis,dee,charlie,mac">
     c00lpazzward
   </token>
-</sites>
+</config>
 STRING;
         $logger = $this->prophesize(AbstractLogger::class)->reveal();
         $parser = new SettingsParser($testXml, $logger);
