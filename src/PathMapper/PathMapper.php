@@ -77,6 +77,27 @@ class PathMapper implements PathMapperInterface
     /**
      * {@inheritDoc}
      */
+    public function createBinaryPairs(
+        $drupal_binary_path,
+        $fedora_binary_path,
+        $drupal_rdf_path,
+        $fedora_rdf_path
+    ) {
+        $sql = "INSERT INTO Gemini (drupal, fedora) VALUES (:drupal_binary, :fedora_binary), (:drupal_rdf, :fedora_rdf)";
+        $stmt = $this->connection->executeQuery(
+            $sql,
+            [
+                'drupal_binary' => $drupal_binary_path,
+                'fedora_binary' => $fedora_binary_path,
+                'drupal_rdf' => $drupal_rdf_path,
+                'fedora_rdf' => $fedora_rdf_path,
+            ]
+        );
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function deleteFromDrupalPath($drupal_path)
     {
         return $this->connection->delete(
