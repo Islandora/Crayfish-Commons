@@ -30,20 +30,6 @@ interface PathMapperInterface
     public function createPair($drupal_path, $fedora_path);
 
     /**
-     * @param string $drupal_binary_path
-     * @param string $fedora_binary_path
-     * @param string $drupal_rdf_path
-     * @param string $fedora_rdf_path
-     * @throws \Exception
-     */
-    public function createBinaryPairs(
-        $drupal_binary_path,
-        $fedora_binary_path,
-        $drupal_rdf_path,
-        $fedora_rdf_path
-    );
-
-    /**
      * @param string $drupal_path
      * @return boolean
      * @throws \Exception
