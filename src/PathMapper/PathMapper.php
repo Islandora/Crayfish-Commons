@@ -33,7 +33,7 @@ class PathMapper implements PathMapperInterface
         $sql = "SELECT fedora FROM Gemini WHERE drupal = :path";
         $stmt = $this->connection->executeQuery(
             $sql,
-            ['path' => $drupal_path]
+            ['path' => urldecode($drupal_path)]
         );
         $result = $stmt->fetch();
 
@@ -52,7 +52,7 @@ class PathMapper implements PathMapperInterface
         $sql = "SELECT drupal FROM Gemini WHERE fedora = :path";
         $stmt = $this->connection->executeQuery(
             $sql,
-            ['path' => $fedora_path]
+            ['path' => urldecode($fedora_path)]
         );
         $result = $stmt->fetch();
 
@@ -68,9 +68,13 @@ class PathMapper implements PathMapperInterface
      */
     public function createPair($drupal_path, $fedora_path)
     {
-        $this->connection->insert(
-            'Gemini',
-            ['drupal' => $drupal_path, 'fedora' => $fedora_path]
+        $sql = "INSERT INTO Gemini (drupal, fedora) VALUES (:drupal_path, :fedora_path)";
+        $stmt = $this->connection->executeQuery(
+            $sql,
+            [
+                'drupal_path' => urldecode($drupal_path),
+                'fedora_path' => urldecode($fedora_path),
+            ]
         );
     }
 
@@ -87,10 +91,10 @@ class PathMapper implements PathMapperInterface
         $stmt = $this->connection->executeQuery(
             $sql,
             [
-                'drupal_binary' => $drupal_binary_path,
-                'fedora_binary' => $fedora_binary_path,
-                'drupal_rdf' => $drupal_rdf_path,
-                'fedora_rdf' => $fedora_rdf_path,
+                'drupal_binary' => urldecode($drupal_binary_path),
+                'fedora_binary' => urldecode($fedora_binary_path),
+                'drupal_rdf' => urldecode($drupal_rdf_path),
+                'fedora_rdf' => urldecode($fedora_rdf_path),
             ]
         );
     }
@@ -102,7 +106,7 @@ class PathMapper implements PathMapperInterface
     {
         return $this->connection->delete(
             'Gemini',
-            ['drupal' => $drupal_path]
+            ['drupal' => urldecode($drupal_path)]
         );
     }
 
@@ -113,7 +117,7 @@ class PathMapper implements PathMapperInterface
     {
         return $this->connection->delete(
             'Gemini',
-            ['fedora' => $fedora_path]
+            ['fedora' => urldecode($fedora_path)]
         );
     }
 }
