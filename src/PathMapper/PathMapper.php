@@ -71,8 +71,8 @@ class PathMapper implements PathMapperInterface
         $this->connection->insert(
             'Gemini',
             [
-                'drupal_path' => urldecode($drupal_path),
-                'fedora_path' => urldecode($fedora_path),
+                'drupal' => urldecode($drupal_path),
+                'fedora' => urldecode($fedora_path),
             ]
         );
     }
