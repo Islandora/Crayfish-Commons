@@ -33,7 +33,7 @@ class PathMapper implements PathMapperInterface
         $sql = "SELECT fedora FROM Gemini WHERE drupal = :path";
         $stmt = $this->connection->executeQuery(
             $sql,
-            ['path' => $drupal_path]
+            ['path' => urldecode($drupal_path)]
         );
         $result = $stmt->fetch();
 
@@ -52,7 +52,7 @@ class PathMapper implements PathMapperInterface
         $sql = "SELECT drupal FROM Gemini WHERE fedora = :path";
         $stmt = $this->connection->executeQuery(
             $sql,
-            ['path' => $fedora_path]
+            ['path' => urldecode($fedora_path)]
         );
         $result = $stmt->fetch();
 
@@ -70,7 +70,10 @@ class PathMapper implements PathMapperInterface
     {
         $this->connection->insert(
             'Gemini',
-            ['drupal' => $drupal_path, 'fedora' => $fedora_path]
+            [
+                'drupal' => urldecode($drupal_path),
+                'fedora' => urldecode($fedora_path),
+            ]
         );
     }
 
@@ -81,7 +84,7 @@ class PathMapper implements PathMapperInterface
     {
         return $this->connection->delete(
             'Gemini',
-            ['drupal' => $drupal_path]
+            ['drupal' => urldecode($drupal_path)]
         );
     }
 
@@ -92,7 +95,7 @@ class PathMapper implements PathMapperInterface
     {
         return $this->connection->delete(
             'Gemini',
-            ['fedora' => $fedora_path]
+            ['fedora' => urldecode($fedora_path)]
         );
     }
 }
