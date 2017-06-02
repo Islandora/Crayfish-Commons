@@ -63,7 +63,7 @@ class IslandoraServiceProvider implements ServiceProviderInterface
             );
         };
 
-        $container['crayfish.fedora_resource'] = function ($container) {
+        $container['crayfish.apix_resource_retriever'] = function ($container) {
             return new FedoraResourceConverter(
                 FedoraApi::create($container['crayfish.fedora_resource.base_url'])
             );

@@ -6,12 +6,11 @@ use Islandora\Chullo\IFedoraApi;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Converts a path provided as a route argument into a HTTP response from
- * Fedora.
+ * Retrieves a Fedora resource using the Apix-Ldp-Resource header. 
  *
  * @package Islandora\Crayfish\Commons
  */
-class FedoraResourceConverter
+class ApixFedoraResourceRetriever
 {
 
     /**
@@ -20,7 +19,7 @@ class FedoraResourceConverter
     protected $api;
 
     /**
-     * FedoraResourceConverter constructor.
+     * ApixFedoraResourceRetriever constructor.
      * @param \Islandora\Chullo\IFedoraApi $api
      */
     public function __construct(IFedoraApi $api)
@@ -29,11 +28,10 @@ class FedoraResourceConverter
     }
 
     /**
-     * @param string $path
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function convert($path, Request $request)
+    public function getFedoraResource(Request $request)
     {
         // Pass along auth headers if present.
         $headers = [];
@@ -41,8 +39,10 @@ class FedoraResourceConverter
             $headers['Authorization'] = $request->headers->get("Authorization");
         }
 
+        $uri = $request->headers->get("Apix-Ldp-Resource");
+
         return $this->api->getResource(
-            $path,
+            $uri,
             $headers
         );
     }
