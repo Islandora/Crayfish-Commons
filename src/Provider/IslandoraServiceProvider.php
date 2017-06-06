@@ -3,7 +3,7 @@
 namespace Islandora\Crayfish\Commons\Provider;
 
 use Islandora\Crayfish\Commons\CmdExecuteService;
-use Islandora\Crayfish\Commons\FedoraResourceConverter;
+use Islandora\Crayfish\Commons\ApixMiddleware;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Silex\Provider\DoctrineServiceProvider;
@@ -63,8 +63,8 @@ class IslandoraServiceProvider implements ServiceProviderInterface
             );
         };
 
-        $container['crayfish.apix_resource_retriever'] = function ($container) {
-            return new FedoraResourceConverter(
+        $container['crayfish.apix_middleware'] = function ($container) {
+            return new ApixMiddleware(
                 FedoraApi::create($container['crayfish.fedora_resource.base_url'])
             );
         };
