@@ -3,6 +3,7 @@
 namespace Islandora\Crayfish\Commons;
 
 use Islandora\Chullo\IFedoraApi;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -20,12 +21,21 @@ class ApixMiddleware
     protected $api;
 
     /**
+     * @var null|\Psr\Log\LoggerInterface
+     */
+    protected $log;
+
+    /**
      * ApixFedoraResourceRetriever constructor.
      * @param \Islandora\Chullo\IFedoraApi $api
+     * @param \Psr\Log\LoggerInterface $log
      */
-    public function __construct(IFedoraApi $api)
-    {
+    public function __construct(
+        IFedoraApi $api,
+        LoggerInterface $log
+    ) {
         $this->api = $api;
+        $this->log = $log;
     }
 
     /**

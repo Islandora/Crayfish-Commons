@@ -4,7 +4,7 @@ namespace Islandora\Crayfish\Commons\Syn\tests;
 
 use Doctrine\DBAL\Connection;
 use Islandora\Crayfish\Commons\CmdExecuteService;
-use Islandora\Crayfish\Commons\FedoraResourceConverter;
+use Islandora\Crayfish\Commons\ApixMiddleware;
 use Islandora\Crayfish\Commons\Provider\IslandoraServiceProvider;
 use Islandora\Crayfish\Commons\Syn\JwtAuthenticator;
 use Islandora\Crayfish\Commons\Syn\SettingsParser;
@@ -58,10 +58,11 @@ class IslandoraServiceProviderTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf(CmdExecuteService::class, $this->container['crayfish.cmd_execute_service']);
     }
 
-    public function testFedoraResource()
+    public function testApixMiddleware()
     {
-        $this->container['crayfish.fedora_resource.base_url'] = 'test';
-        $this->assertInstanceOf(FedoraResourceConverter::class, $this->container['crayfish.fedora_resource']);
+        $this->container['crayfish.log.level'] = 'none';
+        $this->container['crayfish.fedora_resource.base_url'] = 'http://localhost:8080/fcrepo/rest';
+        $this->assertInstanceOf(ApixMiddleware::class, $this->container['crayfish.apix_middleware']);
     }
 
     public function testSyn()

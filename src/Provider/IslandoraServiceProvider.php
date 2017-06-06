@@ -65,7 +65,8 @@ class IslandoraServiceProvider implements ServiceProviderInterface
 
         $container['crayfish.apix_middleware'] = function ($container) {
             return new ApixMiddleware(
-                FedoraApi::create($container['crayfish.fedora_resource.base_url'])
+                FedoraApi::create($container['crayfish.fedora_resource.base_url']),
+                $container['monolog']->withName('crayfish.apix_middleware')
             );
         };
 
