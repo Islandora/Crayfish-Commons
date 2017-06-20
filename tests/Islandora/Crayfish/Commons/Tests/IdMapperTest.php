@@ -4,12 +4,12 @@ namespace Islandora\Crayfish\Commons\Tests;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Driver\Statement;
-use Islandora\Crayfish\Commons\PathMapper\PathMapper;
+use Islandora\Crayfish\Commons\IdMapper\IdMapper;
 use Prophecy\Argument;
 
-class PathMapperTest extends \PHPUnit_Framework_TestCase
+class IdMapperTest extends \PHPUnit_Framework_TestCase
 {
-    public function testGetFedoraPathReturnsResultOnSuccess()
+    public function testGetFedoraIdReturnsResultOnSuccess()
     {
         $statement = $this->prophesize(Statement::class);
         $statement->fetch()->willReturn(['fedora' => 'foo']);
@@ -20,16 +20,16 @@ class PathMapperTest extends \PHPUnit_Framework_TestCase
             ->willReturn($statement);
         $db = $db->reveal();
 
-        $path_mapper = new PathMapper($db);
+        $path_mapper = new IdMapper($db);
 
-        $result = $path_mapper->getFedoraPath("bar");
+        $result = $path_mapper->getFedoraId("bar");
         $this->assertTrue(
             $result == 'foo',
             "Expected 'foo', received $result"
         );
     }
 
-    public function testGetFedoraPathReturnsNullIfNotFound()
+    public function testGetFedoraIdReturnsNullIfNotFound()
     {
         $prophecy = $this->prophesize(Statement::class);
         $prophecy->fetch()->willReturn([]);
@@ -40,16 +40,16 @@ class PathMapperTest extends \PHPUnit_Framework_TestCase
             ->willReturn($statement);
         $db = $prophecy->reveal();
 
-        $path_mapper = new PathMapper($db);
+        $path_mapper = new IdMapper($db);
 
-        $result = $path_mapper->getFedoraPath("foo");
+        $result = $path_mapper->getFedoraId("foo");
         $this->assertTrue(
             $result === null,
             "Expected null, received $result"
         );
     }
 
-    public function testGetDrupalPathReturnsResultOnSuccess()
+    public function testGetDrupalIdReturnsResultOnSuccess()
     {
         $statement = $this->prophesize(Statement::class);
         $statement->fetch()->willReturn(['drupal' => 'foo']);
@@ -60,16 +60,16 @@ class PathMapperTest extends \PHPUnit_Framework_TestCase
             ->willReturn($statement);
         $db = $db->reveal();
 
-        $path_mapper = new PathMapper($db);
+        $path_mapper = new IdMapper($db);
 
-        $result = $path_mapper->getDrupalPath("bar");
+        $result = $path_mapper->getDrupalId("bar");
         $this->assertTrue(
             $result == 'foo',
             "Expected 'foo', received $result"
         );
     }
 
-    public function testGetDrupalPathReturnsNullIfNotFound()
+    public function testGetDrupalIdReturnsNullIfNotFound()
     {
         $prophecy = $this->prophesize(Statement::class);
         $prophecy->fetch()->willReturn([]);
@@ -80,9 +80,9 @@ class PathMapperTest extends \PHPUnit_Framework_TestCase
             ->willReturn($statement);
         $db = $prophecy->reveal();
 
-        $path_mapper = new PathMapper($db);
+        $path_mapper = new IdMapper($db);
 
-        $result = $path_mapper->getDrupalPath("foo");
+        $result = $path_mapper->getDrupalId("foo");
         $this->assertTrue(
             $result === null,
             "Expected null, received $result"

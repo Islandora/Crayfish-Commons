@@ -8,7 +8,7 @@ use Doctrine\DBAL\Connection;
  * Class PathMapper
  * @package Islandora\Crayfish\Commons
  */
-class PathMapper implements PathMapperInterface
+class IdMapper implements IdMapperInterface
 {
 
     /**
@@ -17,7 +17,7 @@ class PathMapper implements PathMapperInterface
     protected $connection;
 
     /**
-     * PathMapper constructor.
+     * IdMapper constructor.
      * @param \Doctrine\DBAL\Connection $connection
      */
     public function __construct(Connection $connection)
@@ -28,12 +28,12 @@ class PathMapper implements PathMapperInterface
     /**
      * {@inheritDoc}
      */
-    public function getFedoraPath($drupal_path)
+    public function getFedoraId($drupal_id)
     {
-        $sql = "SELECT fedora FROM Gemini WHERE drupal = :path";
+        $sql = "SELECT fedora FROM Gemini WHERE drupal = :id";
         $stmt = $this->connection->executeQuery(
             $sql,
-            ['path' => $drupal_path]
+            ['id' => $drupal_id]
         );
         $result = $stmt->fetch();
 
@@ -47,12 +47,12 @@ class PathMapper implements PathMapperInterface
     /**
      * {@inheritDoc}
      */
-    public function getDrupalPath($fedora_path)
+    public function getDrupalId($fedora_id)
     {
-        $sql = "SELECT drupal FROM Gemini WHERE fedora = :path";
+        $sql = "SELECT drupal FROM Gemini WHERE fedora = :id";
         $stmt = $this->connection->executeQuery(
             $sql,
-            ['path' => $fedora_path]
+            ['id' => $fedora_id]
         );
         $result = $stmt->fetch();
 
@@ -66,33 +66,33 @@ class PathMapper implements PathMapperInterface
     /**
      * {@inheritDoc}
      */
-    public function createPair($drupal_path, $fedora_path)
+    public function createPair($drupal_id, $fedora_id)
     {
         $this->connection->insert(
             'Gemini',
-            ['drupal' => $drupal_path, 'fedora' => $fedora_path]
+            ['drupal' => $drupal_id, 'fedora' => $fedora_id]
         );
     }
 
     /**
      * {@inheritDoc}
      */
-    public function deleteFromDrupalPath($drupal_path)
+    public function deleteFromDrupalPath($drupal_id)
     {
         return $this->connection->delete(
             'Gemini',
-            ['drupal' => $drupal_path]
+            ['drupal' => $drupal_id]
         );
     }
 
     /**
      * {@inheritDoc}
      */
-    public function deleteFromFedoraPath($fedora_path)
+    public function deleteFromFedoraPath($fedora_id)
     {
         return $this->connection->delete(
             'Gemini',
-            ['fedora' => $fedora_path]
+            ['fedora' => $fedora_id]
         );
     }
 }
