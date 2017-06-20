@@ -1,6 +1,6 @@
 <?php
 
-namespace Islandora\Crayfish\Commons\PathMapper;
+namespace Islandora\Crayfish\Commons\IdMapper;
 
 /**
  * Interface IdMapperInterface
@@ -34,12 +34,12 @@ interface IdMapperInterface
      * @return boolean
      * @throws \Exception
      */
-    public function deleteDrupalId($drupal_id);
+    public function deleteFromDrupalId($drupal_id);
 
     /**
      * @param string $fedora_id
      * @return boolean
      * @throws \Exception
      */
-    public function deleteFedoraId($fedora_id);
+    public function deleteFromFedoraId($fedora_id);
 }

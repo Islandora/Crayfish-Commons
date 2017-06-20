@@ -1,11 +1,11 @@
 <?php
 
-namespace Islandora\Crayfish\Commons\PathMapper;
+namespace Islandora\Crayfish\Commons\IdMapper;
 
 use Doctrine\DBAL\Connection;
 
 /**
- * Class PathMapper
+ * Class IdMapper
  * @package Islandora\Crayfish\Commons
  */
 class IdMapper implements IdMapperInterface
@@ -77,7 +77,7 @@ class IdMapper implements IdMapperInterface
     /**
      * {@inheritDoc}
      */
-    public function deleteFromDrupalPath($drupal_id)
+    public function deleteFromDrupalId($drupal_id)
     {
         return $this->connection->delete(
             'Gemini',
@@ -88,7 +88,7 @@ class IdMapper implements IdMapperInterface
     /**
      * {@inheritDoc}
      */
-    public function deleteFromFedoraPath($fedora_id)
+    public function deleteFromFedoraId($fedora_id)
     {
         return $this->connection->delete(
             'Gemini',
