@@ -28,12 +28,12 @@ class IdMapper implements IdMapperInterface
     /**
      * {@inheritDoc}
      */
-    public function getFedoraId($drupal_id)
+    public function getMetadataId($drupal)
     {
-        $sql = "SELECT fedora FROM Gemini WHERE drupal = :id";
+        $sql = "SELECT fedora FROM Metadata WHERE drupal = :drupal";
         $stmt = $this->connection->executeQuery(
             $sql,
-            ['id' => $drupal_id]
+            ['drupal' => $drupal]
         );
         $result = $stmt->fetch();
 
@@ -47,17 +47,17 @@ class IdMapper implements IdMapperInterface
     /**
      * {@inheritDoc}
      */
-    public function getDrupalId($fedora_id)
+    public function getBinaryId($drupal)
     {
-        $sql = "SELECT drupal FROM Gemini WHERE fedora = :id";
+        $sql = "SELECT fedora FROM Binary WHERE drupal = :drupal";
         $stmt = $this->connection->executeQuery(
             $sql,
-            ['id' => $fedora_id]
+            ['drupal' => $drupal]
         );
         $result = $stmt->fetch();
 
-        if (isset($result['drupal'])) {
-            return $result['drupal'];
+        if (isset($result['fedora'])) {
+            return $result['fedora'];
         }
 
         return null;
@@ -66,33 +66,66 @@ class IdMapper implements IdMapperInterface
     /**
      * {@inheritDoc}
      */
-    public function createPair($drupal_id, $fedora_id)
+    public function saveMetadataId($drupal, $fedora)
     {
-        $this->connection->insert(
-            'Gemini',
-            ['drupal' => $drupal_id, 'fedora' => $fedora_id]
+        $sql = "UPDATE Metadata SET fedora = :fedora WHERE drupal = :drupal";
+
+        $count = $this->connection->executeUpdate(
+            $sql,
+            ['drupal' => $drupal, 'fedora' => $fedora]
+        );
+
+        if (!$count) {
+            $count = $this->connection->insert(
+                'Metadata',
+                ['drupal' => $drupal, 'fedora' => $fedora]
+            );
+        }
+
+        return $count;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function saveBinaryId($drupal, $fedora, $describedby)
+    {
+        $sql = "UPDATE Binary SET fedora = :fedora, describedby = :describedby WHERE drupal = :drupal";
+
+        $count = $this->connection->executeUpdate(
+            $sql,
+            ['drupal' => $drupal, 'fedora' => $fedora, 'describedby' => $describedby]
+        );
+
+        if (!$count) {
+            $count = $this->connection->insert(
+                'Binary',
+                ['drupal' => $drupal, 'fedora' => $fedora, 'describedby' => $describedby]
+            );
+        }
+
+        return $count;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function deleteMetadataId($drupal)
+    {
+        return $this->connection->delete(
+            'Metadata',
+            ['drupal' => $drupal]
         );
     }
 
     /**
      * {@inheritDoc}
      */
-    public function deleteFromDrupalId($drupal_id)
+    public function deleteBinaryId($describedby)
     {
         return $this->connection->delete(
-            'Gemini',
-            ['drupal' => $drupal_id]
-        );
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function deleteFromFedoraId($fedora_id)
-    {
-        return $this->connection->delete(
-            'Gemini',
-            ['fedora' => $fedora_id]
+            'Binary',
+            ['describedby' => $describedby]
         );
     }
 }

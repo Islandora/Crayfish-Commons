@@ -9,37 +9,45 @@ namespace Islandora\Crayfish\Commons\IdMapper;
 interface IdMapperInterface
 {
     /**
-     * @param string $fedora_id
+     * @param string $drupal
      * @return mixed string|null
      * @throws \Exception
      */
-    public function getDrupalId($fedora_id);
+    public function getMetadataId($drupal);
 
     /**
-     * @param string $drupal_id
+     * @param string $drupal
      * @return mixed string|null
      * @throws \Exception
      */
-    public function getFedoraId($drupal_id);
+    public function getBinaryId($drupal);
 
     /**
-     * @param string $drupal_id
-     * @param string $fedora_id
+     * @param string $drupal
+     * @param string $fedora
      * @throws \Exception
      */
-    public function createPair($drupal_id, $fedora_id);
+    public function saveMetadataId($drupal, $fedora);
 
     /**
-     * @param string $drupal_id
+     * @param string $drupal
+     * @param string $fedora
+     * @param string $describedby
+     * @throws \Exception
+     */
+    public function saveBinaryId($drupal, $fedora, $describedby);
+
+    /**
+     * @param string $drupal
      * @return boolean
      * @throws \Exception
      */
-    public function deleteFromDrupalId($drupal_id);
+    public function deleteMetadataId($drupal);
 
     /**
-     * @param string $fedora_id
+     * @param string $drupal
      * @return boolean
      * @throws \Exception
      */
-    public function deleteFromFedoraId($fedora_id);
+    public function deleteBinaryId($drupal);
 }
