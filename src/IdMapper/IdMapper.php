@@ -30,7 +30,7 @@ class IdMapper implements IdMapperInterface
      */
     public function getMetadataId($drupal)
     {
-        $sql = "SELECT fedora FROM Metadata WHERE drupal = :drupal";
+        $sql = "SELECT fedora FROM gemini.Metadata WHERE drupal = :drupal";
         $stmt = $this->connection->executeQuery(
             $sql,
             ['drupal' => $drupal]
@@ -49,7 +49,7 @@ class IdMapper implements IdMapperInterface
      */
     public function getBinaryId($drupal)
     {
-        $sql = "SELECT fedora FROM Binary WHERE drupal = :drupal";
+        $sql = "SELECT fedora FROM gemini.Binary WHERE drupal = :drupal";
         $stmt = $this->connection->executeQuery(
             $sql,
             ['drupal' => $drupal]
@@ -68,7 +68,7 @@ class IdMapper implements IdMapperInterface
      */
     public function saveMetadataId($drupal, $fedora)
     {
-        $sql = "UPDATE Metadata SET fedora = :fedora WHERE drupal = :drupal";
+        $sql = "UPDATE gemini.Metadata SET fedora = :fedora WHERE drupal = :drupal";
 
         $count = $this->connection->executeUpdate(
             $sql,
@@ -77,7 +77,7 @@ class IdMapper implements IdMapperInterface
 
         if (!$count) {
             $count = $this->connection->insert(
-                'Metadata',
+                'gemini.Metadata',
                 ['drupal' => $drupal, 'fedora' => $fedora]
             );
         }
@@ -90,7 +90,7 @@ class IdMapper implements IdMapperInterface
      */
     public function saveBinaryId($drupal, $fedora, $describedby)
     {
-        $sql = "UPDATE Binary SET fedora = :fedora, describedby = :describedby WHERE drupal = :drupal";
+        $sql = "UPDATE gemini.Binary SET fedora = :fedora, describedby = :describedby WHERE drupal = :drupal";
 
         $count = $this->connection->executeUpdate(
             $sql,
@@ -99,7 +99,7 @@ class IdMapper implements IdMapperInterface
 
         if (!$count) {
             $count = $this->connection->insert(
-                'Binary',
+                'gemini.Binary',
                 ['drupal' => $drupal, 'fedora' => $fedora, 'describedby' => $describedby]
             );
         }
@@ -113,7 +113,7 @@ class IdMapper implements IdMapperInterface
     public function deleteMetadataId($drupal)
     {
         return $this->connection->delete(
-            'Metadata',
+            'gemini.Metadata',
             ['drupal' => $drupal]
         );
     }
@@ -124,7 +124,7 @@ class IdMapper implements IdMapperInterface
     public function deleteBinaryId($describedby)
     {
         return $this->connection->delete(
-            'Binary',
+            'gemini.Binary',
             ['describedby' => $describedby]
         );
     }
