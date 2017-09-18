@@ -31,11 +31,17 @@ class IslandoraServiceProviderTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf(Logger::class, $this->container['monolog']);
     }
 
+    public function testDoctrineOptions()
+    {
+        $this->container['crayfish.db.options.foo'] = 'bar';
+        $this->assertArrayHasKey('foo', $this->container['db.options']);
+        $this->assertEquals('bar', $this->container['db.options']['foo']);
+    }
+
     public function testDoctrine()
     {
         // doctrine uses logger
         $this->container['crayfish.log.level'] = 'none';
-
         $this->assertInstanceOf(Connection::class, $this->container['db']);
     }
 
