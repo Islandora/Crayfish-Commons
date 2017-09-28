@@ -3,7 +3,7 @@
 namespace Islandora\Crayfish\Commons\Provider;
 
 use Islandora\Crayfish\Commons\CmdExecuteService;
-use Islandora\Crayfish\Commons\FedoraResourceConverter;
+use Islandora\Crayfish\Commons\ApixMiddleware;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Silex\Provider\DoctrineServiceProvider;
@@ -63,9 +63,10 @@ class IslandoraServiceProvider implements ServiceProviderInterface
             );
         };
 
-        $container['crayfish.fedora_resource'] = function ($container) {
-            return new FedoraResourceConverter(
-                FedoraApi::create($container['crayfish.fedora_resource.base_url'])
+        $container['crayfish.apix_middleware'] = function ($container) {
+            return new ApixMiddleware(
+                FedoraApi::create($container['crayfish.fedora_resource.base_url']),
+                $container['monolog']->withName('crayfish.apix_middleware')
             );
         };
 
@@ -96,21 +97,21 @@ class IslandoraServiceProvider implements ServiceProviderInterface
     protected function registerDbOptions($container)
     {
         $container['db.options'] = function ($container) {
-            $setoption = function (&$settings, $container, $name) {
-                if (isset($container["crayfish.db.options.$name"])) {
-                    $settings[$name] = $container["crayfish.db.options.$name"];
+            $match = "crayfish.db.options.";
+            $set_option = function (&$settings, $container, $key) use ($match) {
+                $name = substr($key, strlen($match));
+                if (isset($container[$key])) {
+                    $settings[$name] = $container[$key];
                 }
             };
 
             $settings = [];
-            $setoption($settings, $container, 'host');
-            $setoption($settings, $container, 'port');
-            $setoption($settings, $container, 'dbname');
-            $setoption($settings, $container, 'user');
-            $setoption($settings, $container, 'password');
-            $setoption($settings, $container, 'charset');
-            $setoption($settings, $container, 'path');
-            $setoption($settings, $container, 'url');
+            $keys = $container->keys();
+            foreach ($keys as $key) {
+                if (strpos($key, $match) === 0) {
+                        $set_option($settings, $container, $key);
+                }
+            }
 
             return $settings;
         };
