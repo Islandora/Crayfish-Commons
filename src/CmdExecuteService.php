@@ -69,10 +69,16 @@ class CmdExecuteService
         fclose($pipes[0]);
         fclose($data);
 
+        // Make sure the processes output pipes are non-blocking.
+        stream_set_blocking($pipes[1], false);
+        stream_set_blocking($pipes[2], false);
+
         // Wait for process to finish while reading STDOUT to a temp stream.
         // Otherwise the process can block indefinitely if STODUT gets bigger
         // than 4kb.
         $output = fopen("php://temp", 'w+');
+        $error_message = fopen("php://temp", 'w+');
+
         $exit_code = null;
         while ($exit_code === null) {
             $status = proc_get_status($process);
@@ -84,15 +90,21 @@ class CmdExecuteService
             if ($chunk !== false) {
                 fwrite($output, $chunk);
             }
+
+            $chunk = stream_get_contents($pipes[2]);
+            if ($chunk !== false) {
+                fwrite($error_message, $chunk);
+            }
         }
 
-        // Close STDOUT
+        // Close STDOUT & STDERR
         fclose($pipes[1]);
+        fclose($pipes[2]);
 
         // On error, extract message from STDERR and throw an exception.
         if ($exit_code != 0) {
-            $msg = stream_get_contents($pipes[2]);
-            $this->cleanup($pipes, $output, $process);
+            $msg = stream_get_contents($error_message, 1024, 0);
+            $this->cleanup($error_message, $output, $process);
             if ($this->log) {
                 $this->log->error('Process exited with non-zero code.', [
                   'exit_code' => $exit_code,
@@ -103,21 +115,19 @@ class CmdExecuteService
         }
 
         // Return a function that streams the output.
-        return function () use ($pipes, $output, $process) {
+        return function () use ($error_message, $output, $process) {
             rewind($output);
             while (!feof($output)) {
                 echo fread($output, 1024);
-                ob_flush();
-                flush();
             }
-            $this->cleanup($pipes, $output, $process);
+            $this->cleanup($error_message, $output, $process);
         };
     }
 
-    protected function cleanup($pipes, $output, $process)
+    protected function cleanup($error_message, $output, $process)
     {
-        // Close STDERR
-        fclose($pipes[2]);
+        // Close the temp error stream.
+        fclose($error_message);
 
         // Close the temp output stream.
         fclose($output);
