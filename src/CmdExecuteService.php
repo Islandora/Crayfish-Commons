@@ -60,14 +60,18 @@ class CmdExecuteService
         $cmd = escapeshellcmd($cmd);
         $process = proc_open($cmd, $descr, $pipes);
 
-        // Stream input to STDIN
-        while (!feof($data)) {
-            fwrite($pipes[0], fread($data, 1024));
-        }
+        // Get the data into pipe only if data is resource
+        if(gettype($data) == "resource")
+        {
+            // Stream input to STDIN
+            while (!feof($data)) {
+                fwrite($pipes[0], fread($data, 1024));
+            }
 
-        // Close STDIN and the source data.
-        fclose($pipes[0]);
-        fclose($data);
+            // Close STDIN and the source data.
+            fclose($pipes[0]);
+            fclose($data);
+        }
 
         // Wait for process to finish while reading STDOUT to a temp stream.
         // Otherwise the process can block indefinitely if STODUT gets bigger
