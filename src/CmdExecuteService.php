@@ -61,8 +61,7 @@ class CmdExecuteService
         $process = proc_open($cmd, $descr, $pipes);
 
         // Get the data into pipe only if data is resource
-        if(gettype($data) == "resource")
-        {
+        if (gettype($data) == "resource") {
             // Stream input to STDIN
             while (!feof($data)) {
                 fwrite($pipes[0], fread($data, 1024));
