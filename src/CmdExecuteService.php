@@ -36,7 +36,8 @@ class CmdExecuteService
      *
      * @return resource;
      */
-    public function getOutputStream() {
+    public function getOutputStream()
+    {
         return $this->output;
     }
 

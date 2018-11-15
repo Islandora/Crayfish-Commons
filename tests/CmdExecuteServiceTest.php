@@ -15,7 +15,7 @@ class CmdExecuteServiceTest extends \PHPUnit_Framework_TestCase
         $service = new CmdExecuteService($logger);
 
         $string = "apple\npear\nbanana";
-        $data = fopen('php://memory','r+');
+        $data = fopen('php://memory', 'r+');
         fwrite($data, $string);
         rewind($data);
 
@@ -29,7 +29,10 @@ class CmdExecuteServiceTest extends \PHPUnit_Framework_TestCase
         rewind($output);
         $actual = stream_get_contents($output);
 
-        $this->assertTrue($actual == "apple\nbanana\npear\n", "Output stream should have sorted the list, received $actual");
+        $this->assertTrue(
+            $actual == "apple\nbanana\npear\n",
+            "Output stream should have sorted the list, received $actual"
+        );
 
         // Call the callback just to close the streams/process.
         $callback();
