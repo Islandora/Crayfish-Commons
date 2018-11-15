@@ -18,12 +18,27 @@ class CmdExecuteService
     protected $log;
 
     /**
+     * @var resource
+     */
+    protected $output;
+
+    /**
      * Executor constructor.
      * @param LoggerInterface $log
      */
     public function __construct(LoggerInterface $log = null)
     {
         $this->log = $log;
+    }
+
+    /**
+     * $output getter.
+     *
+     * @return resource;
+     */
+    public function getOutputStream()
+    {
+        return $this->output;
     }
 
     /**
@@ -75,7 +90,7 @@ class CmdExecuteService
         // Wait for process to finish while reading STDOUT to a temp stream.
         // Otherwise the process can block indefinitely if STODUT gets bigger
         // than 4kb.
-        $output = fopen("php://temp", 'w+');
+        $this->output = fopen("php://temp", 'w+');
         $exit_code = null;
         while ($exit_code === null) {
             $status = proc_get_status($process);
@@ -85,7 +100,7 @@ class CmdExecuteService
 
             $chunk = stream_get_contents($pipes[1]);
             if ($chunk !== false) {
-                fwrite($output, $chunk);
+                fwrite($this->output, $chunk);
             }
         }
 
@@ -95,7 +110,7 @@ class CmdExecuteService
         // On error, extract message from STDERR and throw an exception.
         if ($exit_code != 0) {
             $msg = stream_get_contents($pipes[2]);
-            $this->cleanup($pipes, $output, $process);
+            $this->cleanup($pipes, $this->output, $process);
             if ($this->log) {
                 $this->log->error('Process exited with non-zero code.', [
                   'exit_code' => $exit_code,
@@ -106,14 +121,14 @@ class CmdExecuteService
         }
 
         // Return a function that streams the output.
-        return function () use ($pipes, $output, $process) {
-            rewind($output);
-            while (!feof($output)) {
-                echo fread($output, 1024);
+        return function () use ($pipes, $process) {
+            rewind($this->output);
+            while (!feof($this->output)) {
+                echo fread($this->output, 1024);
                 ob_flush();
                 flush();
             }
-            $this->cleanup($pipes, $output, $process);
+            $this->cleanup($pipes, $this->output, $process);
         };
     }
 
@@ -123,7 +138,7 @@ class CmdExecuteService
         fclose($pipes[2]);
 
         // Close the temp output stream.
-        fclose($output);
+        fclose($this->output);
 
         // Close the process
         proc_close($process);
