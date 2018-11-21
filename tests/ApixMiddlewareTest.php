@@ -1,6 +1,6 @@
 <?php
 
-namespace Islandora\Crayfish\Commons\Tests;
+namespace Islandora\Crayfish\Commons\tests;
 
 use Islandora\Chullo\IFedoraApi;
 use Islandora\Crayfish\Commons\ApixMiddleware;
@@ -10,16 +10,8 @@ use Psr\Http\Message\ResponseInterface;
 use Prophecy\Argument;
 use Symfony\Component\HttpFoundation\Request;
 
-/**
- * Class ApixMiddlewareTest
- * @package Islandora\Crayfish\Commons\Tests
- * @coversDefaultClass \Islandora\Crayfish\Commons\ApixMiddleware
- */
 class ApixMiddlewareTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @covers ::before
-     */
     public function testReturnsFedoraError()
     {
         // Mock a Fedora response.
@@ -66,9 +58,6 @@ class ApixMiddlewareTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    /**
-     * @covers ::before
-     */
     public function testReturns400IfNoApixLdpResourceHeader()
     {
         // Mock a FedoraApi.
