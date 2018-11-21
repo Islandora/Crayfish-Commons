@@ -259,8 +259,8 @@ class GeminiClientTest extends TestCase
    */
     public function testCreate()
     {
-      $base_url = 'http://localhost:1234/example';
-      $client = GeminiClient::create($base_url, $this->logger);
-      $this->assertTrue($client instanceof GeminiClient);
+        $base_url = 'http://localhost:1234/example';
+        $client = GeminiClient::create($base_url, $this->logger);
+        $this->assertTrue($client instanceof GeminiClient);
     }
 }
