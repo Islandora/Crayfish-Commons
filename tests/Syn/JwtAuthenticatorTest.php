@@ -138,9 +138,9 @@ class JwtAuthenticatorTest extends \PHPUnit_Framework_TestCase
     public function testHeaderTokenFields()
     {
         $data = [
-            'uid' => 1,
-            'url' => 'https://foo.com',
-            'name' => 'charlie',
+            'webid' => 1,
+            'iss' => 'https://foo.com',
+            'sub' => 'charlie',
             'roles' => ['bartender', 'exterminator'],
             'iat' => 1,
             'exp' => 1,
@@ -148,15 +148,15 @@ class JwtAuthenticatorTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(is_array($this->headerTokenHelper($data)));
 
         $missing = $data;
-        unset($missing['uid']);
+        unset($missing['webid']);
         $this->assertNull($this->headerTokenHelper($missing));
 
         $missing = $data;
-        unset($missing['url']);
+        unset($missing['iss']);
         $this->assertNull($this->headerTokenHelper($missing));
 
         $missing = $data;
-        unset($missing['name']);
+        unset($missing['sub']);
         $this->assertNull($this->headerTokenHelper($missing));
 
         $missing = $data;
@@ -203,9 +203,9 @@ class JwtAuthenticatorTest extends \PHPUnit_Framework_TestCase
     public function testJwtAuthentication()
     {
         $data = [
-            'uid' => 1,
-            'url' => 'https://foo.com',
-            'name' => 'charlie',
+            'webid' => 1,
+            'iss' => 'https://foo.com',
+            'sub' => 'charlie',
             'roles' => ['bartender', 'exterminator'],
             'iat' => 1,
             'exp' => 1,
@@ -217,9 +217,9 @@ class JwtAuthenticatorTest extends \PHPUnit_Framework_TestCase
     public function testJwtAuthenticationInvalidJwt()
     {
         $data = [
-            'uid' => 1,
-            'url' => 'https://foo.com',
-            'name' => 'charlie',
+            'webid' => 1,
+            'iss' => 'https://foo.com',
+            'sub' => 'charlie',
             'roles' => ['bartender', 'exterminator'],
             'iat' => 1,
             'exp' => 1,
@@ -231,9 +231,9 @@ class JwtAuthenticatorTest extends \PHPUnit_Framework_TestCase
     public function testJwtAuthenticationNoSite()
     {
         $data = [
-            'uid' => 1,
-            'url' => 'https://www.pattyspub.ca/',
-            'name' => 'charlie',
+            'webid' => 1,
+            'iss' => 'https://www.pattyspub.ca/',
+            'sub' => 'charlie',
             'roles' => ['bartender', 'exterminator'],
             'iat' => 1,
             'exp' => 1,
@@ -245,9 +245,9 @@ class JwtAuthenticatorTest extends \PHPUnit_Framework_TestCase
     public function testJwtAuthenticationDefaultSite()
     {
         $data = [
-            'uid' => 1,
-            'url' => 'https://www.pattyspub.ca/',
-            'name' => 'charlie',
+            'webid' => 1,
+            'iss' => 'https://www.pattyspub.ca/',
+            'sub' => 'charlie',
             'roles' => ['bartender', 'exterminator'],
             'iat' => 1,
             'exp' => 1,

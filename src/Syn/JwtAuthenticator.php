@@ -72,16 +72,16 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
 
         // Check correct properties
         $payload = $jwt->getPayload();
-        if (!isset($payload['uid'])) {
-            $this->logger->info('Token missing uid');
+        if (!isset($payload['webid'])) {
+            $this->logger->info('Token missing webid');
             return null;
         }
-        if (!isset($payload['url'])) {
-            $this->logger->info('Token missing url');
+        if (!isset($payload['iss'])) {
+            $this->logger->info('Token missing iss');
             return null;
         }
-        if (!isset($payload['name'])) {
-            $this->logger->info('Token missing name');
+        if (!isset($payload['sub'])) {
+            $this->logger->info('Token missing sub');
             return null;
         }
         if (!isset($payload['roles'])) {
@@ -105,7 +105,7 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
         return [
             'token' => $token,
             'jwt' => $jwt,
-            'name' => $payload['name'],
+            'name' => $payload['sub'],
             'roles' => $payload['roles']
         ];
     }
@@ -126,7 +126,7 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
 
         $jwt = $credentials['jwt'];
         $payload = $jwt->getPayload();
-        $url = $payload['url'];
+        $url = $payload['iss'];
         if (isset($this->sites[$url])) {
             $site = $this->sites[$url];
         } elseif (isset($this->sites['default'])) {
