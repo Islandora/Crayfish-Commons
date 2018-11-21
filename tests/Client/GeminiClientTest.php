@@ -41,6 +41,7 @@ class GeminiClientTest extends TestCase
 
     /**
      * @covers ::getUrls
+     * @covers ::__construct
      */
     public function testGetUrls()
     {
@@ -251,5 +252,15 @@ class GeminiClientTest extends TestCase
             $out,
             "Gemini client must return null when 404 is returned."
         );
+    }
+
+  /**
+   * @covers ::create
+   */
+    public function testCreate()
+    {
+      $base_url = 'http://localhost:1234/example';
+      $client = GeminiClient::create($base_url, $this->logger);
+      $this->assertTrue($client instanceof GeminiClient);
     }
 }
