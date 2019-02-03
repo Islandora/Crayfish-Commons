@@ -4,7 +4,7 @@
     "type": "library",
     "require": {
         "islandora/chullo": "^0.1.1",
-        "symfony/http-foundation": "3.2.6",
+        "symfony/http-foundation": "^3.2.6",
         "psr/log": "^1.0.1",
         "doctrine/dbal": "~2.2",
         "Symfony/Security": "^3.2",
