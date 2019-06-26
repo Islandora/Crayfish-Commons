@@ -36,23 +36,14 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
         $this->sites = $parser->getSites();
     }
 
-    public function supports(Request $request)
-    {
-        return $request->headers->has('Authorization');
-    }
-
+    /**
+     * {@inheritdoc}
+     */
     public function getCredentials(Request $request)
     {
         // Check headers
         $token = $request->headers->get('Authorization');
-        if (!$token) {
-            $this->logger->info('Token missing');
-            return null;
-        }
-        if (0 !== strpos(strtolower($token), 'bearer ')) {
-            $this->logger->info('Token malformed');
-            return null;
-        }
+
         $token = substr($token, 7);
         $this->logger->debug("Token: $token");
 
@@ -72,57 +63,44 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
             $jwt = $this->jwtFactory->load($token);
         } catch (InvalidArgumentException $exception) {
             $this->logger->info('Invalid token. ' . $exception->getMessage());
-            return null;
+            return [
+              'token' => $token,
+              'name' => null,
+              'roles' => null,
+            ];
         }
 
         // Check correct properties
         $payload = $jwt->getPayload();
-        if (!isset($payload['webid'])) {
-            $this->logger->info('Token missing webid');
-            return null;
-        }
-        if (!isset($payload['iss'])) {
-            $this->logger->info('Token missing iss');
-            return null;
-        }
-        if (!isset($payload['sub'])) {
-            $this->logger->info('Token missing sub');
-            return null;
-        }
-        if (!isset($payload['roles'])) {
-            $this->logger->info('Token missing roles');
-            return null;
-        }
-        if (!isset($payload['iat'])) {
-            $this->logger->info('Token missing iat');
-            return null;
-        }
-        if (!isset($payload['exp'])) {
-            $this->logger->info('Token missing exp');
-            return null;
-        }
-
-        if ($jwt->isExpired()) {
-            $this->logger->info('Token expired');
-            return null;
-        }
 
         return [
             'token' => $token,
             'jwt' => $jwt,
-            'name' => $payload['sub'],
-            'roles' => $payload['roles']
+            'name' => isset($payload['sub']) ? $payload['sub'] : null,
+            'roles' => isset($payload['roles']) ? $payload['roles'] : null,
         ];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
         $user = new JwtUser($credentials['name'], $credentials['roles']);
         return $user;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function checkCredentials($credentials, UserInterface $user)
     {
+        if ($credentials['name'] === null) {
+            // No name means the token was invalid.
+            $this->logger->info("Token was invalid:");
+            return false;
+        }
+
         // If this is a static token then no more verification needed
         if ($credentials['jwt'] === null) {
             $this->logger->info('Logged in with static token: ' . $credentials['name']);
@@ -131,6 +109,35 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
 
         $jwt = $credentials['jwt'];
         $payload = $jwt->getPayload();
+        if (!isset($payload['webid'])) {
+            $this->logger->info('Token missing webid');
+            return false;
+        }
+        if (!isset($payload['iss'])) {
+            $this->logger->info('Token missing iss');
+            return false;
+        }
+        if (!isset($payload['sub'])) {
+            $this->logger->info('Token missing sub');
+            return false;
+        }
+        if (!isset($payload['roles'])) {
+            $this->logger->info('Token missing roles');
+            return false;
+        }
+        if (!isset($payload['iat'])) {
+            $this->logger->info('Token missing iat');
+            return false;
+        }
+        if (!isset($payload['exp'])) {
+            $this->logger->info('Token missing exp');
+            return false;
+        }
+        if ($jwt->isExpired()) {
+            $this->logger->info('Token expired');
+            return false;
+        }
+
         $url = $payload['iss'];
         if (isset($this->sites[$url])) {
             $site = $this->sites[$url];
@@ -144,12 +151,18 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
         return $jwt->isValid($site['key'], $site['algorithm']);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
         // on success, let the request continue
         return null;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
         $data = array(
@@ -158,6 +171,9 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
         return new JsonResponse($data, 403);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function start(Request $request, AuthenticationException $authException = null)
     {
         $data = array(
@@ -166,8 +182,29 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
         return new JsonResponse($data, 401);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function supportsRememberMe()
     {
         return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function supports(Request $request)
+    {
+        // Check headers
+        $token = $request->headers->get('Authorization');
+        if (!$token) {
+            $this->logger->info('Token missing');
+            return false;
+        }
+        if (0 !== strpos(strtolower($token), 'bearer ')) {
+            $this->logger->info('Token malformed');
+            return false;
+        }
+        return true;
     }
 }

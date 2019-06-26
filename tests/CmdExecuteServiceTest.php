@@ -39,6 +39,7 @@ class CmdExecuteServiceTest extends TestCase
         );
 
         // Call the callback just to close the streams/process.
+        // This causes content to be printed to the test output.
         $callback();
     }
 
