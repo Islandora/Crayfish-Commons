@@ -4,15 +4,18 @@ namespace Islandora\Crayfish\Commons;
 
 use Islandora\Chullo\IFedoraApi;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
+use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
  * Retrieves a Fedora resource using the Apix-Ldp-Resource header.
  *
  * @package Islandora\Crayfish\Commons
  */
-class ApixMiddleware
+class ApixMiddleware implements EventSubscriberInterface
 {
 
     /**
@@ -42,15 +45,23 @@ class ApixMiddleware
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function before(Request $request)
+    public function before(RequestEvent $event)
     {
+
+        if (!$event->isMasterRequest()) {
+            return;
+        }
+
+        $request = $event->getRequest();
+
         // Short circuit if there's no Apix-Ldp-Resource header.
         if (!$request->headers->has("Apix-Ldp-Resource")) {
             $this->log->debug("Malformed request, no Apix-Ldp-Resource header present");
-            return new Response(
+            $event->setResponse(new Response(
                 "Malformed request, no Apix-Ldp-Resource header present",
                 400
-            );
+            ));
+            return;
         }
 
         // Get the resource.
@@ -64,10 +75,11 @@ class ApixMiddleware
               'status' => $fedora_resource->getStatusCode(),
               'headers' => $fedora_resource->getHeaders()
             ]);
-            return new Response(
+            $event->setResponse(new Response(
                 $fedora_resource->getReasonPhrase(),
                 $status
-            );
+            ));
+            return;
         }
 
         // Set the Fedora resource on the request.
@@ -89,4 +101,17 @@ class ApixMiddleware
             $headers
         );
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getSubscribedEvents()
+    {
+        return [
+            KernelEvents::REQUEST => [
+                ['before', 0],
+            ],
+        ];
+    }
+
 }
