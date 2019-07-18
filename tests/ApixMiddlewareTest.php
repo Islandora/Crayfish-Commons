@@ -102,8 +102,8 @@ class ApixMiddlewareTest extends TestCase
         $response = $request_event->getResponse();
 
           $this->assertTrue(
-            $response->getStatusCode() == 400,
-            "Response code must be 400 if no ApixLdpResource header is present."
-        );
+              $response->getStatusCode() == 400,
+              "Response code must be 400 if no ApixLdpResource header is present."
+          );
     }
 }

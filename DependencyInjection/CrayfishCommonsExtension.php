@@ -23,8 +23,10 @@ class CrayfishCommonsExtension extends Extension
 
         $config = $this->processConfiguration($configuration, $configs);
 
-        $loader = new YamlFileLoader($container,
-          new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader = new YamlFileLoader(
+            $container,
+            new FileLocator(__DIR__ . '/../Resources/config')
+        );
         $loader->load('crayfish_commons.yaml');
 
         if (!$container->has('Islandora\Crayfish\Commons\Client\GeminiClient')) {
@@ -33,7 +35,8 @@ class CrayfishCommonsExtension extends Extension
               ->setArgument('$base_url', $config['gemini_base_uri']);
         }
 
-        if (!$container->has('Islandora\Crayfish\Commons\Syn\SettingsParser')) {
+        if (!$container->has('Islandora\Crayfish\Commons\Syn\SettingsParser') &&
+            $config['syn_enabled'] === true) {
             if (file_exists($config['syn_config'])) {
                 $xml = file_get_contents($config['syn_config']);
             } else {

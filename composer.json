@@ -27,12 +27,12 @@
     },
     "scripts": {
         "check": [
-            "phpcs --standard=PSR2 src tests",
-            "phpcpd --names *.php src tests"
+            "./vendor/bin/phpcs --standard=PSR2 --extensions=php --ignore=\"vendor/\" .",
+            "./vendor/bin/phpcpd --names *.php ."
         ],
         "test": [
             "@check",
-            "phpunit"
+            "./vendor/bin/phpunit"
         ]
     },
     "license": "MIT",

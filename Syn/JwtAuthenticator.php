@@ -206,6 +206,6 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
             $this->logger->info('Token malformed');
             return false;
         }
-       return true;
+        return true;
     }
 }

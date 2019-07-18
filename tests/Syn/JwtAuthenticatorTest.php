@@ -153,8 +153,10 @@ class JwtAuthenticatorTest extends TestCase
      */
     private function checkCredsHelper($credentials)
     {
-        $authorized = $this->simpleAuth->checkCredentials($credentials,
-          new JwtUser($credentials['name'], $credentials['roles']));
+        $authorized = $this->simpleAuth->checkCredentials(
+            $credentials,
+            new JwtUser($credentials['name'], $credentials['roles'])
+        );
         return $authorized;
     }
 

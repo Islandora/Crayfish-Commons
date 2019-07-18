@@ -113,5 +113,4 @@ class ApixMiddleware implements EventSubscriberInterface
             ],
         ];
     }
-
 }
