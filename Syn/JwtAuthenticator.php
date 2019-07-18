@@ -48,12 +48,6 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
         $token = substr($token, 7);
         $this->logger->debug("Token: $token");
 
-        $invalid_response = [
-            'token' => $token,
-            'name' => null,
-            'roles' => null,
-        ];
-
         // Check if this is a static token
         if (isset($this->staticTokens[$token])) {
             $staticToken = $this->staticTokens[$token];
@@ -70,7 +64,11 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
             $jwt = $this->jwtFactory->load($token);
         } catch (InvalidArgumentException $exception) {
             $this->logger->info('Invalid token. ' . $exception->getMessage());
-            return $invalid_response;
+            return [
+              'token' => $token,
+              'name' => null,
+              'roles' => null,
+            ];
         }
 
         // Check correct properties
@@ -79,8 +77,8 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
         return [
             'token' => $token,
             'jwt' => $jwt,
-            'name' => $payload['sub'],
-            'roles' => $payload['roles']
+            'name' => isset($payload['sub']) ? $payload['sub'] : null,
+            'roles' => isset($payload['roles']) ? $payload['roles'] : null,
         ];
     }
 
