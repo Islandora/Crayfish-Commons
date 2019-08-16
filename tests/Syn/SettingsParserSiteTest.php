@@ -4,9 +4,10 @@ namespace Islandora\Crayfish\Commons\Syn\tests;
 
 use Islandora\Crayfish\Commons\Syn\SettingsParser;
 use org\bovigo\vfs\vfsStream;
+use PHPUnit\Framework\TestCase;
 use Psr\Log\AbstractLogger;
 
-class SettingsParserSiteTest extends \PHPUnit_Framework_TestCase
+class SettingsParserSiteTest extends TestCase
 {
 
     public function testInvalidVersion()

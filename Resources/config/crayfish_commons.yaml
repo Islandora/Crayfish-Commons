@@ -1,0 +1,34 @@
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  # These services rely on expected container available DI injections.
+  # Other services are loaded in the CrayfishCommonsExtension class.
+  Islandora\Crayfish\Commons\Syn\:
+    resource: '../../Syn/*'
+    # This is case-sensitive
+    exclude: '../../Syn/{SettingsParser.php}'
+
+  Islandora\Crayfish\Commons\CmdExecuteService:
+
+  Islandora\Crayfish\Commons\ApixMiddleware:
+    tags:
+    - { name: kernel.event_subscriber, event: kernel.request }
+
+  # Aliases, if the class has not yet been instantiated it will be
+  # in CrayfishCommonsExtension class
+  crayfish.cmd_execute_service:
+    alias: Islandora\Crayfish\Commons\CmdExecuteService
+
+  crayfish.syn.jwt_authentication:
+    class: Islandora\Crayfish\Commons\Syn\JwtAuthenticator
+
+  crayfish.geminiclient:
+    # This sets the alias but GeminiClient is created in the Extension class.
+    alias: Islandora\Crayfish\Commons\Client\GeminiClient
+
+  crayfish.syn.settings_parser:
+    alias: Islandora\Crayfish\Commons\Syn\SettingsParser

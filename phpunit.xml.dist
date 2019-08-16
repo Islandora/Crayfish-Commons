@@ -3,14 +3,15 @@
     colors="true">
     <testsuites>
         <testsuite name="crayfish-commons">
-            <directory>tests</directory>
+            <directory>tests/</directory>
         </testsuite>
     </testsuites>
     <filter>
       <whitelist processUncoveredFilesFromWhitelist="true">
-        <directory suffix=".php">src/</directory>
+        <directory suffix=".php">.</directory>
         <exclude>
-          <directory suffix=".php">tests/</directory>
+            <directory suffix=".php">tests/</directory>
+            <directory>vendor</directory>
         </exclude>
       </whitelist>
     </filter>

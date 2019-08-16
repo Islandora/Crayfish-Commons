@@ -110,7 +110,7 @@ class CmdExecuteService
         // On error, extract message from STDERR and throw an exception.
         if ($exit_code != 0) {
             $msg = stream_get_contents($pipes[2]);
-            $this->cleanup($pipes, $this->output, $process);
+            $this->cleanup($pipes, $process);
             if ($this->log) {
                 $this->log->error('Process exited with non-zero code.', [
                   'exit_code' => $exit_code,
@@ -128,11 +128,11 @@ class CmdExecuteService
                 ob_flush();
                 flush();
             }
-            $this->cleanup($pipes, $this->output, $process);
+            $this->cleanup($pipes, $process);
         };
     }
 
-    protected function cleanup($pipes, $output, $process)
+    protected function cleanup($pipes, $process)
     {
         // Close STDERR
         fclose($pipes[2]);
