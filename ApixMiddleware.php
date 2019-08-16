@@ -55,8 +55,10 @@ class ApixMiddleware implements EventSubscriberInterface
         $request = $event->getRequest();
 
         // Short circuit if this is an OPTIONS or HEAD request.
-        if (in_array(strtoupper($request->getMethod()),
-            ['OPTIONS', 'HEAD'])) {
+        if (in_array(
+            strtoupper($request->getMethod()),
+            ['OPTIONS', 'HEAD']
+        )) {
             return;
         }
 
