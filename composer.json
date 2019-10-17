@@ -2,6 +2,10 @@
     "name": "islandora/crayfish-commons",
     "description": "Shared code amongst Islandora Crayfish microservices",
     "type": "library",
+    "homepage": "https://github.com/Islandora/Crayfish-Commons",
+    "support": {
+        "issues": "https://github.com/Islandora/documentation/issues"
+    },
     "require": {
         "islandora/chullo": "dev-dev",
         "symfony/http-foundation": "^3.2.6",
