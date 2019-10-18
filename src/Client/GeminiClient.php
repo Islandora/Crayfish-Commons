@@ -100,9 +100,11 @@ class GeminiClient
      */
     public function mintFedoraUrl(
         $uuid,
-        $token = null
+        $token = null,
+        $container_name = ''
     ) {
         $headers = ['Content-Type' => 'text/plain'];
+        $headers = ['container-name' => $container_name];
 
         if (!empty($token)) {
             $headers['Authorization'] = $token;
