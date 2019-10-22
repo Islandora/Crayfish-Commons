@@ -3,10 +3,10 @@
 # Crayfish Commons
 
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.2-8892BF.svg?style=flat-square)](https://php.net/)
-[![Build Status](https://travis-ci.com/Islandora-CLAW/Crayfish-Commons.svg?branch=master)](https://travis-ci.com/Islandora-CLAW/Crayfish-Commons)
+[![Build Status](https://travis-ci.com/Islandora/Crayfish-Commons.svg?branch=master)](https://travis-ci.com/Islandora/Crayfish-Commons)
 [![Contribution Guidelines](http://img.shields.io/badge/CONTRIBUTING-Guidelines-blue.svg)](./CONTRIBUTING.md)
 [![LICENSE](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](./LICENSE)
-[![codecov](https://codecov.io/gh/Islandora-CLAW/Crayfish-Commons/branch/master/graph/badge.svg)](https://codecov.io/gh/Islandora-CLAW/Crayfish-Commons)
+[![codecov](https://codecov.io/gh/Islandora/Crayfish-Commons/branch/master/graph/badge.svg)](https://codecov.io/gh/Islandora/Crayfish-Commons)
 
 
 ## Introduction
@@ -36,7 +36,7 @@ There is no related configuration as it serves as a dependency for  microservice
 
 ## Documentation
 
-Further documentation for this module is available on the [Islandora 8 documentation site](https://islandora-claw.github.io/CLAW/).
+Further documentation for this module is available on the [Islandora 8 documentation site](https://islandora.github.io/documentation/).
 
 
 ## Troubleshooting/Issues
@@ -65,11 +65,11 @@ This project has been sponsored by:
 
 ## Development
 
-If you would like to contribute, please get involved by attending our weekly [Tech Call](https://github.com/Islandora-CLAW/CLAW/wiki). We love to hear from you!
+If you would like to contribute, please get involved by attending our weekly [Tech Call](https://github.com/Islandora/documentation/wiki). We love to hear from you!
 
 If you would like to contribute code to the project, you need to be covered by an Islandora Foundation [Contributor License Agreement](http://islandora.ca/sites/default/files/islandora_cla.pdf) or [Corporate Contributor License Agreement](http://islandora.ca/sites/default/files/islandora_ccla.pdf). Please see the [Contributors](http://islandora.ca/resources/contributors) pages on Islandora.ca for more information.
 
-We recommend using the [claw-playbook](https://github.com/Islandora-Devops/claw-playbook) to get started. If you want to pull down the submodules for development, don't forget to run `git submodule update --init --recursive` after cloning.
+We recommend using the [islandora-playbook](https://github.com/Islandora-Devops/islandora-playbook) to get started. If you want to pull down the submodules for development, don't forget to run `git submodule update --init --recursive` after cloning.
 
 ## License
 
