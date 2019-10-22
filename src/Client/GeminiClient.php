@@ -104,7 +104,7 @@ class GeminiClient
         $container_name = ''
     ) {
         $headers = ['Content-Type' => 'text/plain'];
-        $headers = ['container-name' => $container_name];
+        $headers['container-name'] = $container_name;
 
         if (!empty($token)) {
             $headers['Authorization'] = $token;
