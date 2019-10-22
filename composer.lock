@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "169900c43f4cb39779802ddb7108b897",
+    "content-hash": "9a6acba0fb12efbfa8d861eff89e4d35",
     "packages": [
         {
             "name": "doctrine/cache",
@@ -491,13 +491,13 @@
             "version": "dev-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Islandora-CLAW/chullo.git",
-                "reference": "30f13e76e1cd918e84ca960daf4613477f022c74"
+                "url": "https://github.com/Islandora/chullo.git",
+                "reference": "3695548b137318daa5b902ee13f284fe517ad56d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Islandora-CLAW/chullo/zipball/30f13e76e1cd918e84ca960daf4613477f022c74",
-                "reference": "30f13e76e1cd918e84ca960daf4613477f022c74",
+                "url": "https://api.github.com/repos/Islandora/chullo/zipball/3695548b137318daa5b902ee13f284fe517ad56d",
+                "reference": "3695548b137318daa5b902ee13f284fe517ad56d",
                 "shasum": ""
             },
             "require": {
@@ -525,23 +525,23 @@
             "authors": [
                 {
                     "name": "Islandora Foundation",
-                    "role": "Owner",
-                    "email": "community@islandora.ca"
-                },
-                {
-                    "name": "Nick Ruest",
-                    "role": "Maintainer",
-                    "email": "ruestn@gmail.com"
+                    "email": "community@islandora.ca",
+                    "role": "Owner"
                 },
                 {
                     "name": "Daniel Lamb",
-                    "role": "Maintainer",
-                    "email": "dlamb@islandora.ca"
+                    "email": "dlamb@islandora.ca",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Nick Ruest",
+                    "email": "ruestn@gmail.com",
+                    "role": "Maintainer"
                 }
             ],
             "description": "A PHP client for interacting with a Fedora 4 server.",
-            "homepage": "https://github.com/islandora-claw/chullo",
-            "time": "2019-06-28 17:29:44"
+            "homepage": "https://github.com/Islandora/chullo",
+            "time": "2019-10-21T01:32:34+00:00"
         },
         {
             "name": "ml/iri",
