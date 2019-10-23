@@ -2,12 +2,16 @@
     "name": "islandora/crayfish-commons",
     "description": "Shared code amongst Islandora Crayfish microservices",
     "type": "library",
+    "homepage": "https://github.com/Islandora/Crayfish-Commons",
+    "support": {
+        "issues": "https://github.com/Islandora/documentation/issues"
+    },
     "require": {
         "islandora/chullo": "dev-dev",
         "symfony/http-foundation": "^3.2.6",
         "psr/log": "^1.0.1",
         "doctrine/dbal": "~2.2",
-        "Symfony/Security": "^3.2",
+        "symfony/security": "^3.2",
         "namshi/jose": "^7.2",
         "pimple/pimple": "~3.0",
         "monolog/monolog": "^1.22",
@@ -49,3 +53,4 @@
         }
     ]
 }
+
