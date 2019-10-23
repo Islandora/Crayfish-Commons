@@ -93,6 +93,7 @@ class GeminiClient
      * Mints a new Fedora URL for a UUID.
      * @param $uuid
      * @param $token
+     * @param $fedora_container_url
      *
      * @throws \GuzzleHttp\Exception\RequestException
      *
@@ -101,10 +102,10 @@ class GeminiClient
     public function mintFedoraUrl(
         $uuid,
         $token = null,
-        $container_name = ''
+        $fedora_container_url = ''
     ) {
         $headers = ['Content-Type' => 'text/plain'];
-        $headers['container-name'] = $container_name;
+        $headers['fedora-container-url'] = $fedora_container_url;
 
         if (!empty($token)) {
             $headers['Authorization'] = $token;
