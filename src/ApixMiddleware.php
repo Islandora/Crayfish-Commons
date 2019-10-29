@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @package Islandora\Crayfish\Commons
  */
-class ApixMiddleware
+class ApixMiddleware   
 {
 
     /**
