@@ -30,6 +30,5 @@ after_success:
 
 notifications:
   slack:
-    on_success: change
-    on_failure: always
-    secure: $SLACK_NOTIFICATION_KEY
+    rooms:
+      - islandora:"$SLACK_NOTIFICATION_KEY"#notifications
