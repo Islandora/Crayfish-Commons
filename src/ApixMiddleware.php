@@ -89,11 +89,4 @@ class ApixMiddleware
             $headers
         );
     }
-}          
-
-
-      
- 
- 
- 
-     
+}
