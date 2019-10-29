@@ -29,6 +29,6 @@ after_success:
   - bash <(curl -s https://codecov.io/bash)
 
 notifications:
-  slack:
+  slack: 
     rooms:
-      - islandora:"$SLACK_NOTIFICATION_KEY"#notifications
+      - islandora:"$SLACK_NOTIFICATION_KEY"
