@@ -102,10 +102,10 @@ class GeminiClient
     public function mintFedoraUrl(
         $uuid,
         $token = null,
-        $fedora_container_url = ''
+        $islandora_fedora_endpoint = ''
     ) {
         $headers = ['Content-Type' => 'text/plain'];
-        $headers['fedora-container-url'] = $fedora_container_url;
+        $headers['X-Islandora-Fedora-Endpoint'] = $islandora_fedora_endpoint;
 
         if (!empty($token)) {
             $headers['Authorization'] = $token;
