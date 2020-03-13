@@ -81,7 +81,7 @@ class GeminiClient
 
             return json_decode($response->getBody(), true);
         } catch (RequestException $e) {
-            if ($e->getResponse()->getStatusCode() == 404) {
+            if (!$e->getResponse() || $e->getResponse()->getStatusCode() == 404) {
                 return null;
             }
 
