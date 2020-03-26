@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "9a6acba0fb12efbfa8d861eff89e4d35",
+    "content-hash": "4e14881cd9d7d263dd00ebb408392409",
     "packages": [
         {
             "name": "doctrine/cache",
@@ -488,28 +488,28 @@
         },
         {
             "name": "islandora/chullo",
-            "version": "dev-dev",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Islandora/chullo.git",
-                "reference": "3695548b137318daa5b902ee13f284fe517ad56d"
+                "reference": "9ae6a6139bc6622feb956b2f917f3098661bb6eb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Islandora/chullo/zipball/3695548b137318daa5b902ee13f284fe517ad56d",
-                "reference": "3695548b137318daa5b902ee13f284fe517ad56d",
+                "url": "https://api.github.com/repos/Islandora/chullo/zipball/9ae6a6139bc6622feb956b2f917f3098661bb6eb",
+                "reference": "9ae6a6139bc6622feb956b2f917f3098661bb6eb",
                 "shasum": ""
             },
             "require": {
                 "easyrdf/easyrdf": "^0.9.1",
                 "guzzlehttp/guzzle": "^6.1.0",
                 "ml/json-ld": "^1.0.4",
-                "php": ">=5.6.0"
+                "php": "^7.1"
             },
             "require-dev": {
                 "mockery/mockery": "^0.9",
-                "phpunit/phpunit": "^5.0",
-                "sebastian/phpcpd": "^3.0",
+                "phpunit/phpunit": "^7.0",
+                "sebastian/phpcpd": "^4.0",
                 "squizlabs/php_codesniffer": "^2.0"
             },
             "type": "library",
@@ -541,7 +541,7 @@
             ],
             "description": "A PHP client for interacting with a Fedora 4 server.",
             "homepage": "https://github.com/Islandora/chullo",
-            "time": "2019-10-21T01:32:34+00:00"
+            "time": "2020-03-23T17:51:01+00:00"
         },
         {
             "name": "ml/iri",
@@ -3813,9 +3813,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "islandora/chullo": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
