@@ -1,6 +1,6 @@
 <?php
 
-namespace Islandora\Crayfish\Commons\Client\Tests;
+namespace Islandora\Crayfish\Commons\tests\Client;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
@@ -19,7 +19,7 @@ use Psr\Log\LoggerInterface;
 /**
  * Class GeminiClientTest
  * @package Islandora\Crayfish\Commons\Client\Tests
- * @coversDefaultClass Islandora\Crayfish\Commons\Client\GeminiClient
+ * @coversDefaultClass \Islandora\Crayfish\Commons\Client\GeminiClient
  */
 class GeminiClientTest extends TestCase
 {
@@ -200,8 +200,9 @@ class GeminiClientTest extends TestCase
         $prophesize = $this->prophesize(Client::class);
 
         $request = new Request('GET', '/by_uri');
+        $response = new Response();
         $prophesize->get(Argument::any(), Argument::any())
-        ->willThrow(new ClientException('Uri not found', $request));
+        ->willThrow(new ClientException('Uri not found', $request, $response));
         $client = $prophesize->reveal();
 
         $gemini = new GeminiClient(

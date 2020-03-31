@@ -1,6 +1,6 @@
 <?php
 
-namespace Islandora\Crayfish\Commons\Syn\tests;
+namespace Islandora\Crayfish\Commons\tests\Syn;
 
 use Islandora\Crayfish\Commons\Syn\SettingsParser;
 use PHPUnit\Framework\TestCase;
