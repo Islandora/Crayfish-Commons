@@ -3,6 +3,7 @@
 namespace Islandora\Crayfish\Commons\Provider;
 
 use Islandora\Crayfish\Commons\CmdExecuteService;
+use Islandora\Crayfish\Commons\ApixMiddleware;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Silex\Provider\DoctrineServiceProvider;
@@ -57,6 +58,13 @@ class IslandoraServiceProvider implements ServiceProviderInterface
         $container['crayfish.cmd_execute_service'] = function ($container) {
             return new CmdExecuteService(
                 $container['monolog']->withName('crayfish.cmd_execute_service')
+            );
+        };
+
+        $container['crayfish.apix_middleware'] = function ($container) {
+            return new ApixMiddleware(
+                FedoraApi::create($container['crayfish.fedora_resource.base_url']),
+                $container['monolog']->withName('crayfish.apix_middleware')
             );
         };
 
