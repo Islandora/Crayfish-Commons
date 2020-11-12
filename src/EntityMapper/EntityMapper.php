@@ -17,8 +17,7 @@ class EntityMapper implements EntityMapperInterface
         }
 
         $segments = str_split(substr($uuid, 0, 8), 2);
-        $path = implode("/", $segments) . "/$uuid";
-        return $fedora_endpoint . '/' . $path;
+        return implode("/", $segments) . "/$uuid";
     }
 
     /**
