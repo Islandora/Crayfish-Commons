@@ -7,7 +7,7 @@
         "issues": "https://github.com/Islandora/documentation/issues"
     },
     "require": {
-        "islandora/chullo": "dev-dev",
+        "islandora/chullo": "dev-d9",
         "symfony/http-foundation": "^4.4",
         "psr/log": "^1.0.1",
         "doctrine/dbal": "~2.2",
