@@ -16,7 +16,7 @@ class IslandoraServiceProviderTest extends TestCase
 {
     protected $container;
 
-    public function setup()
+    public function setup(): void
     {
         $islandora = new IslandoraServiceProvider();
         $container = new Application();
