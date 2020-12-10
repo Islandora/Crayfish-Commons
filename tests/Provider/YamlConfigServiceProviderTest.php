@@ -34,11 +34,9 @@ YAML;
         $this->assertEquals('bar', $container['crayfish.another.foo']);
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     */
     public function testYamlNoFile()
     {
+        $this->expectException(InvalidArgumentException::class);
         $parser = new YamlConfigServiceProvider('/does/not/exist');
         $container = new Container();
         $parser->register($container);
