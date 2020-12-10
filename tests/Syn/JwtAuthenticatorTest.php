@@ -12,8 +12,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
+use PHPUnit\Framework\TestCase;
 
-class JwtAuthenticatorTest extends \PHPUnit_Framework_TestCase
+class JwtAuthenticatorTest extends TestCase
 {
     public function getParser($site = null, $token = null)
     {

@@ -4,11 +4,11 @@ namespace Islandora\Crayfish\Commons\Syn\tests;
 
 use Islandora\Crayfish\Commons\Provider\YamlConfigServiceProvider;
 use org\bovigo\vfs\vfsStream;
-use PHPUnit_Framework_TestCase;
 use Pimple\Container;
+use PHPUnit\Framework\TestCase;
 use InvalidArgumentException;
 
-class YamlConfigServiceProviderTest extends PHPUnit_Framework_TestCase
+class YamlConfigServiceProviderTest extends TestCase
 {
     public function testYamlParsing()
     {

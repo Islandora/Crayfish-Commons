@@ -9,10 +9,10 @@ use Islandora\Crayfish\Commons\Provider\IslandoraServiceProvider;
 use Islandora\Crayfish\Commons\Syn\JwtAuthenticator;
 use Islandora\Crayfish\Commons\Syn\SettingsParser;
 use Monolog\Logger;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Silex\Application;
 
-class IslandoraServiceProviderTest extends PHPUnit_Framework_TestCase
+class IslandoraServiceProviderTest extends TestCase
 {
     protected $container;
 

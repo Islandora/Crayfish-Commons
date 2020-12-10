@@ -9,8 +9,9 @@ use Monolog\Handler\NullHandler;
 use Psr\Http\Message\ResponseInterface;
 use Prophecy\Argument;
 use Symfony\Component\HttpFoundation\Request;
+use PHPUnit\Framework\TestCase;
 
-class ApixMiddlewareTest extends \PHPUnit_Framework_TestCase
+class ApixMiddlewareTest extends TestCase
 {
     public function testReturnsFedoraError()
     {
