@@ -4,11 +4,11 @@ namespace Islandora\Crayfish\Commons\Syn\tests;
 
 use Islandora\Crayfish\Commons\Provider\YamlConfigServiceProvider;
 use org\bovigo\vfs\vfsStream;
-use PHPUnit_Framework_TestCase;
 use Pimple\Container;
+use PHPUnit\Framework\TestCase;
 use InvalidArgumentException;
 
-class YamlConfigServiceProviderTest extends PHPUnit_Framework_TestCase
+class YamlConfigServiceProviderTest extends TestCase
 {
     public function testYamlParsing()
     {
@@ -34,11 +34,9 @@ YAML;
         $this->assertEquals('bar', $container['crayfish.another.foo']);
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     */
     public function testYamlNoFile()
     {
+        $this->expectException(InvalidArgumentException::class);
         $parser = new YamlConfigServiceProvider('/does/not/exist');
         $container = new Container();
         $parser->register($container);

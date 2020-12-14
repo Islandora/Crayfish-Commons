@@ -4,8 +4,9 @@ namespace Islandora\Crayfish\Commons\Syn\tests;
 
 use Islandora\Crayfish\Commons\Syn\SettingsParser;
 use Psr\Log\AbstractLogger;
+use PHPUnit\Framework\TestCase;
 
-class SettingsParserTokenTest extends \PHPUnit_Framework_TestCase
+class SettingsParserTokenTest extends TestCase
 {
 
     public function testInvalidVersion()

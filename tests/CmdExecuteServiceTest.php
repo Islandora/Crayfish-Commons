@@ -5,8 +5,9 @@ namespace Islandora\Crayfish\Commons\tests;
 use Islandora\Crayfish\Commons\CmdExecuteService;
 use Monolog\Logger;
 use Monolog\Handler\NullHandler;
+use PHPUnit\Framework\TestCase;
 
-class CmdExecuteServiceTest extends \PHPUnit_Framework_TestCase
+class CmdExecuteServiceTest extends TestCase
 {
     public function testExecuteWithResource()
     {
