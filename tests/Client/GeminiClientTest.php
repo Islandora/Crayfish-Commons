@@ -11,6 +11,7 @@ use Islandora\Crayfish\Commons\Client\GeminiClient;
 use Monolog\Handler\NullHandler;
 use Monolog\Logger;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\RequestInterface;
 use Prophecy\Argument;
@@ -23,6 +24,8 @@ use Psr\Log\LoggerInterface;
  */
 class GeminiClientTest extends TestCase
 {
+    use ProphecyTrait;
+
     /**
      * @var LoggerInterface
      */

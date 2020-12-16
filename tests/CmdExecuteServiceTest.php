@@ -6,9 +6,12 @@ use Islandora\Crayfish\Commons\CmdExecuteService;
 use Monolog\Logger;
 use Monolog\Handler\NullHandler;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 class CmdExecuteServiceTest extends TestCase
 {
+    use ProphecyTrait;
+
     public function testExecuteWithResource()
     {
         $logger = new Logger('test');

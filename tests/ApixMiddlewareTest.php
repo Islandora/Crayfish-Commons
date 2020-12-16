@@ -6,6 +6,7 @@ use Islandora\Chullo\IFedoraApi;
 use Islandora\Crayfish\Commons\ApixMiddleware;
 use Monolog\Logger;
 use Monolog\Handler\NullHandler;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\Http\Message\ResponseInterface;
 use Prophecy\Argument;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,6 +14,8 @@ use PHPUnit\Framework\TestCase;
 
 class ApixMiddlewareTest extends TestCase
 {
+    use ProphecyTrait;
+
     public function testReturnsFedoraError()
     {
         // Mock a Fedora response.

@@ -8,6 +8,7 @@ use Islandora\Crayfish\Commons\Syn\JwtUser;
 use Islandora\Crayfish\Commons\Syn\SettingsParser;
 use Namshi\JOSE\SimpleJWS;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
@@ -16,6 +17,9 @@ use PHPUnit\Framework\TestCase;
 
 class JwtAuthenticatorTest extends TestCase
 {
+
+    use ProphecyTrait;
+
     public function getParser($site = null, $token = null)
     {
         if ($site === null) {
