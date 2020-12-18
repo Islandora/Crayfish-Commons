@@ -3,11 +3,14 @@
 namespace Islandora\Crayfish\Commons\Syn\tests;
 
 use Islandora\Crayfish\Commons\Syn\SettingsParser;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\Log\AbstractLogger;
 use PHPUnit\Framework\TestCase;
 
 class SettingsParserTokenTest extends TestCase
 {
+
+    use ProphecyTrait;
 
     public function testInvalidVersion()
     {
