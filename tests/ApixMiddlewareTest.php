@@ -13,8 +13,17 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
+/**
+ * Class ApixMiddlewareTest
+ * @package Islandora\Crayfish\Commons\tests
+ * @coversDefaultClass \Islandora\Crayfish\Commons\ApixMiddleware
+ */
 class ApixMiddlewareTest extends TestCase
 {
+    /**
+     * @covers ::before
+     * @covers ::getFedoraResource
+     */
     public function testReturnsFedoraError()
     {
         $prophecy = $this->prophesize(HttpKernelInterface::class);
@@ -68,6 +77,10 @@ class ApixMiddlewareTest extends TestCase
         );
     }
 
+    /**
+     * @covers ::before
+     * @covers ::getFedoraResource
+     */
     public function testReturns400IfNoApixLdpResourceHeader()
     {
         $prophecy = $this->prophesize(HttpKernelInterface::class);
