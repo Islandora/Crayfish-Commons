@@ -36,6 +36,11 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
         $this->sites = $parser->getSites();
     }
 
+    public function supports(Request $request)
+    {
+        return $request->headers->has('Authorization');
+    }
+
     public function getCredentials(Request $request)
     {
         // Check headers

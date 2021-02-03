@@ -2,7 +2,7 @@
 
 namespace Islandora\Crayfish\Commons\EntityMapper;
 
-class EntityMapper implements EntityMapperInterface 
+class EntityMapper implements EntityMapperInterface
 {
     /**
      * {@inheritdoc}
