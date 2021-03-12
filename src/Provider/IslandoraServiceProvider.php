@@ -54,8 +54,6 @@ class IslandoraServiceProvider implements ServiceProviderInterface
             }
         };
 
-        $this->registerDbOptions($container);
-
         // Register our services
         $container['crayfish.cmd_execute_service'] = function ($container) {
             return new CmdExecuteService(
@@ -91,29 +89,6 @@ class IslandoraServiceProvider implements ServiceProviderInterface
                 new JwtFactory(),
                 $app['monolog']->withName('crayfish.syn.jwt_authentication')
             );
-        };
-    }
-
-    protected function registerDbOptions($container)
-    {
-        $container['db.options'] = function ($container) {
-            $match = "crayfish.db.options.";
-            $set_option = function (&$settings, $container, $key) use ($match) {
-                $name = substr($key, strlen($match));
-                if (isset($container[$key])) {
-                    $settings[$name] = $container[$key];
-                }
-            };
-
-            $settings = [];
-            $keys = $container->keys();
-            foreach ($keys as $key) {
-                if (strpos($key, $match) === 0) {
-                        $set_option($settings, $container, $key);
-                }
-            }
-
-            return $settings;
         };
     }
 }
