@@ -2,11 +2,11 @@
 ![Crayfish](https://user-images.githubusercontent.com/2371345/48163075-11c6cf80-e2b5-11e8-8b5b-991b366014a5.png)
 # Crayfish Commons
 
-[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.2-8892BF.svg?style=flat-square)](https://php.net/)
-[![Build Status](https://travis-ci.com/Islandora/Crayfish-Commons.svg?branch=main)](https://travis-ci.com/Islandora/Crayfish-Commons)
+[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.3-8892BF.svg?style=flat-square)](https://php.net/)
+[![Build Status](https://github.com/islandora/crayfish-commons/actions/workflows/build-dev.yml/badge.svg)](https://github.com/Islandora/crayfish-commons/actions)
 [![Contribution Guidelines](http://img.shields.io/badge/CONTRIBUTING-Guidelines-blue.svg)](./CONTRIBUTING.md)
 [![LICENSE](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](./LICENSE)
-[![codecov](https://codecov.io/gh/Islandora/Crayfish-Commons/branch/main/graph/badge.svg)](https://codecov.io/gh/Islandora/Crayfish-Commons)
+[![codecov](https://codecov.io/gh/Islandora/Crayfish-Commons/branch/dev/graphs/badge.svg?branch=dev)](https://codecov.io/gh/Islandora/Crayfish-Commons)
 
 
 ## Introduction
