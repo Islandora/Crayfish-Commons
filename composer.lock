@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "99964adb9a6ba084a445948b7266761b",
+    "content-hash": "78f0710c3f0e1f76dfe9357f7bb945df",
     "packages": [
         {
             "name": "doctrine/cache",
@@ -628,7 +628,7 @@
         },
         {
             "name": "islandora/chullo",
-            "version": "1.2.0",
+            "version": "dev-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Islandora/chullo.git",
@@ -652,6 +652,7 @@
                 "sebastian/phpcpd": "^6.0",
                 "squizlabs/php_codesniffer": "^3.0"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -5616,7 +5617,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "islandora/chullo": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
