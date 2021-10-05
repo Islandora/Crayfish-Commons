@@ -3,10 +3,10 @@
 # Crayfish Commons
 
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.3-8892BF.svg?style=flat-square)](https://php.net/)
-[![Build Status](https://github.com/islandora/crayfish-commons/actions/workflows/build-dev.yml/badge.svg)](https://github.com/Islandora/crayfish-commons/actions)
+[![Build Status](https://github.com/islandora/crayfish-commons/actions/workflows/build-2.x.yml/badge.svg)](https://github.com/Islandora/crayfish-commons/actions)
 [![Contribution Guidelines](http://img.shields.io/badge/CONTRIBUTING-Guidelines-blue.svg)](./CONTRIBUTING.md)
 [![LICENSE](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](./LICENSE)
-[![codecov](https://codecov.io/gh/Islandora/Crayfish-Commons/branch/dev/graphs/badge.svg?branch=dev)](https://codecov.io/gh/Islandora/Crayfish-Commons)
+[![codecov](https://codecov.io/gh/Islandora/Crayfish-Commons/branch/2.x/graphs/badge.svg?branch=2.x)](https://codecov.io/gh/Islandora/Crayfish-Commons)
 
 
 ## Introduction

@@ -8,7 +8,7 @@
     },
     "require": {
         "doctrine/dbal": "~2.2",
-        "islandora/chullo": "dev-dev",
+        "islandora/chullo": "^1",
         "monolog/monolog": "^1.22",
         "namshi/jose": "^7.2",
         "pimple/pimple": "~3.0",
