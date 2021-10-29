@@ -18,9 +18,7 @@ class Configuration implements ConfigurationInterface
         $root->addDefaultsIfNotSet()
             ->children()
             ->scalarNode('fedora_base_uri')->cannotBeEmpty()->defaultValue('http://localhost:8080/fcrepo/rest')->end()
-            ->scalarNode('gemini_base_uri')->cannotBeEmpty()->defaultValue('http://localhost:8000/gemini')->end()
             ->scalarNode('syn_config')->defaultValue(__DIR__ . '/../Resources/default_syn.xml')->end()
-            ->booleanNode('syn_enabled')->defaultTrue()->end()
         ->end();
 
         return $treeBuilder;

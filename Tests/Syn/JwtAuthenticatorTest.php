@@ -1,28 +1,25 @@
 <?php
 
-namespace Islandora\Crayfish\Commons\tests\Syn;
+namespace Islandora\Crayfish\Commons\Tests\Syn;
 
 use Islandora\Crayfish\Commons\Syn\JwtAuthenticator;
 use Islandora\Crayfish\Commons\Syn\JwtFactory;
 use Islandora\Crayfish\Commons\Syn\JwtUser;
 use Islandora\Crayfish\Commons\Syn\JwtUserProvider;
 use Islandora\Crayfish\Commons\Syn\SettingsParser;
+use Islandora\Crayfish\Commons\Tests\AbstractCrayfishCommonsTestCase;
 use Namshi\JOSE\SimpleJWS;
-use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
-use Prophecy\PhpUnit\ProphecyTrait;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
-class JwtAuthenticatorTest extends TestCase
+class JwtAuthenticatorTest extends AbstractCrayfishCommonsTestCase
 {
-
-    use ProphecyTrait;
 
     private $simpleAuth;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->simpleAuth = $this->getSimpleAuth();

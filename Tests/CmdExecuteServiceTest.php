@@ -1,22 +1,15 @@
 <?php
 
-namespace Islandora\Crayfish\Commons\tests;
+namespace Islandora\Crayfish\Commons\Tests;
 
 use Islandora\Crayfish\Commons\CmdExecuteService;
-use Monolog\Logger;
-use Monolog\Handler\NullHandler;
-use PHPUnit\Framework\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
 
-class CmdExecuteServiceTest extends TestCase
+class CmdExecuteServiceTest extends AbstractCrayfishCommonsTestCase
 {
-    use ProphecyTrait;
 
     public function testExecuteWithResource()
     {
-        $logger = new Logger('test');
-        $logger->pushHandler(new NullHandler());
-        $service = new CmdExecuteService($logger);
+        $service = new CmdExecuteService($this->logger);
 
         $string = "apple\npear\nbanana";
         $data = fopen('php://memory', 'r+');
@@ -45,9 +38,7 @@ class CmdExecuteServiceTest extends TestCase
 
     public function testExecuteWithoutResource()
     {
-        $logger = new Logger('test');
-        $logger->pushHandler(new NullHandler());
-        $service = new CmdExecuteService($logger);
+        $service = new CmdExecuteService($this->logger);
 
         $command = 'echo "derp"';
         $callback = $service->execute($command, "");

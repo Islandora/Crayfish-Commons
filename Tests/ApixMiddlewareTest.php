@@ -1,12 +1,11 @@
 <?php
 
-namespace Islandora\Crayfish\Commons\tests;
+namespace Islandora\Crayfish\Commons\Tests;
 
 use Islandora\Chullo\IFedoraApi;
 use Islandora\Crayfish\Commons\ApixMiddleware;
 use Monolog\Logger;
 use Monolog\Handler\NullHandler;
-use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Prophecy\Argument;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,12 +14,11 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 /**
  * Class ApixMiddlewareTest
- * @package Islandora\Crayfish\Commons\tests
+ * @package Islandora\Crayfish\Commons\Tests
  * @coversDefaultClass \Islandora\Crayfish\Commons\ApixMiddleware
  */
-class ApixMiddlewareTest extends TestCase
+class ApixMiddlewareTest extends AbstractCrayfishCommonsTestCase
 {
-    use ProphecyTrait;
 
     /**
      * @covers ::before

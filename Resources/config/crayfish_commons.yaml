@@ -3,16 +3,14 @@ services:
   _defaults:
     autowire: true
     autoconfigure: true
-    public: false
+    public: true
 
   # These services rely on expected container available DI injections.
   # Other services are loaded in the CrayfishCommonsExtension class.
-  Islandora\Crayfish\Commons\Syn\:
-    resource: '../../Syn/*'
-    # This is case-sensitive
-    exclude: '../../Syn/{SettingsParser.php}'
+  Islandora\Crayfish\Commons\CmdExecuteService: ~
 
-  Islandora\Crayfish\Commons\CmdExecuteService:
+  Islandora\Crayfish\Commons\EntityMapper\:
+    resource: '../../EntityMapper/*'
 
   Islandora\Crayfish\Commons\ApixMiddleware:
     tags:
@@ -23,12 +21,5 @@ services:
   crayfish.cmd_execute_service:
     alias: Islandora\Crayfish\Commons\CmdExecuteService
 
-  crayfish.syn.jwt_authentication:
-    class: Islandora\Crayfish\Commons\Syn\JwtAuthenticator
-
-  crayfish.geminiclient:
-    # This sets the alias but GeminiClient is created in the Extension class.
-    alias: Islandora\Crayfish\Commons\Client\GeminiClient
-
-  crayfish.syn.settings_parser:
-    alias: Islandora\Crayfish\Commons\Syn\SettingsParser
+  # Map the concrete class to the interface.
+  Islandora\Crayfish\Commons\EntityMapper\EntityMapperInterface: '@Islandora\Crayfish\Commons\EntityMapper\EntityMapper'

@@ -1,16 +1,12 @@
 <?php
 
-namespace Islandora\Crayfish\Commons\tests\Syn;
+namespace Islandora\Crayfish\Commons\Tests\Syn;
 
 use Islandora\Crayfish\Commons\Syn\SettingsParser;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Psr\Log\AbstractLogger;
-use PHPUnit\Framework\TestCase;
+use Islandora\Crayfish\Commons\Tests\AbstractCrayfishCommonsTestCase;
 
-class SettingsParserTokenTest extends TestCase
+class SettingsParserTokenTest extends AbstractCrayfishCommonsTestCase
 {
-
-    use ProphecyTrait;
 
     public function testInvalidVersion()
     {
@@ -21,8 +17,7 @@ class SettingsParserTokenTest extends TestCase
   </token>
 </config>
 STRING;
-        $logger = $this->prophesize(AbstractLogger::class)->reveal();
-        $parser = new SettingsParser($testXml, $logger);
+        $parser = new SettingsParser($testXml, $this->logger);
         $tokens = $parser->getStaticTokens();
         $this->assertEquals(0, count($tokens));
     }
@@ -36,8 +31,7 @@ STRING;
   </token>
 </config>
 STRING;
-        $logger = $this->prophesize(AbstractLogger::class)->reveal();
-        $parser = new SettingsParser($testXml, $logger);
+        $parser = new SettingsParser($testXml, $this->logger);
         $tokens = $parser->getStaticTokens();
         $this->assertEquals(1, count($tokens));
         $this->assertTrue(isset($tokens['c00lpazzward']));
@@ -56,8 +50,7 @@ STRING;
   </token>
 </config>
 STRING;
-        $logger = $this->prophesize(AbstractLogger::class)->reveal();
-        $parser = new SettingsParser($testXml, $logger);
+        $parser = new SettingsParser($testXml, $this->logger);
         $tokens = $parser->getStaticTokens();
         $this->assertEquals(1, count($tokens));
         $this->assertTrue(isset($tokens['c00lpazzward']));
@@ -75,8 +68,7 @@ STRING;
   </token>
 </config>
 STRING;
-        $logger = $this->prophesize(AbstractLogger::class)->reveal();
-        $parser = new SettingsParser($testXml, $logger);
+        $parser = new SettingsParser($testXml, $this->logger);
         $tokens = $parser->getStaticTokens();
         $this->assertEquals(1, count($tokens));
         $this->assertTrue(isset($tokens['c00lpazzward']));
