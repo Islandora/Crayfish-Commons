@@ -4,8 +4,6 @@ namespace Islandora\Crayfish\Commons\Tests;
 
 use Islandora\Chullo\IFedoraApi;
 use Islandora\Crayfish\Commons\ApixMiddleware;
-use Monolog\Logger;
-use Monolog\Handler\NullHandler;
 use Psr\Http\Message\ResponseInterface;
 use Prophecy\Argument;
 use Symfony\Component\HttpFoundation\Request;
@@ -42,14 +40,9 @@ class ApixMiddlewareTest extends AbstractCrayfishCommonsTestCase
         $prophecy->getResource(Argument::any(), Argument::any())->willReturn($mock_fedora_response);
         $mock_fedora_api = $prophecy->reveal();
 
-        // Make a null logger.
-        $log = new Logger('null');
-        $handler = new NullHandler();
-        $log->pushHandler($handler);
-
         $middleware = new ApixMiddleware(
             $mock_fedora_api,
-            $log
+            $this->logger
         );
 
         // Create a Request.
@@ -90,15 +83,10 @@ class ApixMiddlewareTest extends AbstractCrayfishCommonsTestCase
         $prophecy = $this->prophesize(IFedoraApi::class);
         $mock_fedora_api = $prophecy->reveal();
 
-        // Make a null logger.
-        $log = new Logger('null');
-        $handler = new NullHandler();
-        $log->pushHandler($handler);
-
         // Make the middleware.
         $middleware = new ApixMiddleware(
             $mock_fedora_api,
-            $log
+            $this->logger
         );
 
         // Create a Request.

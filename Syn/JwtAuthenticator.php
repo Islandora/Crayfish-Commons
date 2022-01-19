@@ -44,6 +44,7 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
         // Check headers
         $token = $request->headers->get('Authorization');
 
+        // Chop off the leading "bearer " from the token
         $token = substr($token, 7);
         $this->logger->debug("Token: $token");
 
@@ -76,8 +77,8 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
         return [
             'token' => $token,
             'jwt' => $jwt,
-            'name' => isset($payload['sub']) ? $payload['sub'] : null,
-            'roles' => isset($payload['roles']) ? $payload['roles'] : null,
+            'name' => $payload['sub'] ?? NULL,
+            'roles' => $payload['roles'] ?? NULL,
         ];
     }
 
@@ -86,8 +87,7 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
      */
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
-        $user = new JwtUser($credentials['name'], $credentials['roles']);
-        return $user;
+        return new JwtUser($credentials['name'], $credentials['roles']);
     }
 
     /**
@@ -109,28 +109,34 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
 
         $jwt = $credentials['jwt'];
         $payload = $jwt->getPayload();
+        // Check and warn of all missing claims before rejecting.
+        $missing_claim = false;
         if (!isset($payload['webid'])) {
             $this->logger->info('Token missing webid');
-            return false;
+            $missing_claim = true;
         }
         if (!isset($payload['iss'])) {
             $this->logger->info('Token missing iss');
-            return false;
+            $missing_claim = true;
         }
         if (!isset($payload['sub'])) {
             $this->logger->info('Token missing sub');
-            return false;
+            $missing_claim = true;
         }
         if (!isset($payload['roles'])) {
             $this->logger->info('Token missing roles');
-            return false;
+            $missing_claim = true;
         }
         if (!isset($payload['iat'])) {
             $this->logger->info('Token missing iat');
-            return false;
+            $missing_claim = true;
         }
         if (!isset($payload['exp'])) {
             $this->logger->info('Token missing exp');
+            $missing_claim = true;
+        }
+        if ($missing_claim) {
+            // If any claim is missing
             return false;
         }
         if ($jwt->isExpired()) {

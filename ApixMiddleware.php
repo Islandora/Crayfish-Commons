@@ -42,15 +42,11 @@ class ApixMiddleware implements EventSubscriberInterface
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @return \Psr\Http\Message\ResponseInterface
+     *
+     * @param \Symfony\Component\HttpKernel\Event\RequestEvent $event
      */
     public function before(RequestEvent $event)
     {
-
-        if (!$event->isMasterRequest()) {
-            return;
-        }
 
         $request = $event->getRequest();
 
