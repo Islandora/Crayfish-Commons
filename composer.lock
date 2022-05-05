@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "78f0710c3f0e1f76dfe9357f7bb945df",
+    "content-hash": "0cc34ba256b334926691368ccc2943b9",
     "packages": [
         {
             "name": "doctrine/cache",
@@ -628,23 +628,23 @@
         },
         {
             "name": "islandora/chullo",
-            "version": "dev-dev",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Islandora/chullo.git",
-                "reference": "d563d5e48ef9b15dcf45029277bbc2f6eeef2454"
+                "reference": "a7c1e051eab2a5077eaf5db2649201fa775c5a02"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Islandora/chullo/zipball/d563d5e48ef9b15dcf45029277bbc2f6eeef2454",
-                "reference": "d563d5e48ef9b15dcf45029277bbc2f6eeef2454",
+                "url": "https://api.github.com/repos/Islandora/chullo/zipball/a7c1e051eab2a5077eaf5db2649201fa775c5a02",
+                "reference": "a7c1e051eab2a5077eaf5db2649201fa775c5a02",
                 "shasum": ""
             },
             "require": {
                 "easyrdf/easyrdf": "^0.9 || ^1",
                 "guzzlehttp/guzzle": "^6.1.0",
                 "ml/json-ld": "^1.0.4",
-                "php": "^7.3 || ^7.4"
+                "php": ">=7.3"
             },
             "require-dev": {
                 "mockery/mockery": "^0.9",
@@ -652,7 +652,6 @@
                 "sebastian/phpcpd": "^6.0",
                 "squizlabs/php_codesniffer": "^3.0"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -684,9 +683,9 @@
             "homepage": "https://github.com/Islandora/chullo",
             "support": {
                 "issues": "https://github.com/Islandora/documentation/issues",
-                "source": "https://github.com/Islandora/chullo/tree/1.2.0"
+                "source": "https://github.com/Islandora/chullo/tree/1.3.0"
             },
-            "time": "2021-05-05T17:38:36+00:00"
+            "time": "2021-12-16T22:31:48+00:00"
         },
         {
             "name": "ml/iri",
@@ -5617,9 +5616,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "islandora/chullo": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
