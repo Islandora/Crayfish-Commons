@@ -1,44 +1,54 @@
 {
     "name": "islandora/crayfish-commons",
     "description": "Shared code amongst Islandora Crayfish microservices",
-    "type": "library",
+    "type": "symfony-bundle",
     "homepage": "https://github.com/Islandora/Crayfish-Commons",
     "support": {
         "issues": "https://github.com/Islandora/documentation/issues"
     },
     "require": {
-        "doctrine/dbal": "~2.2",
-        "islandora/chullo": "^1",
-        "monolog/monolog": "^1.22",
-        "namshi/jose": "^7.2",
-        "pimple/pimple": "~3.0",
+        "islandora/chullo": "^1.0",
         "psr/log": "^1.0.1",
-        "silex/silex": "^2.0",
-        "symfony/http-foundation": "^3.4 || ^4.4",
-        "symfony/security": "^3.4 || ^4.4",
-        "symfony/yaml": "^3.4 || ^4.4"
+        "namshi/jose": "^7.2",
+        "symfony/monolog-bundle": "^3.4",
+        "symfony/http-foundation": "4.4.*",
+        "symfony/config": "4.4.*",
+        "symfony/dependency-injection": "4.4.*",
+        "symfony/event-dispatcher": "4.4.*",
+        "symfony/yaml": "4.4.*",
+        "symfony/security-bundle": "4.4.*"
     },
     "require-dev": {
-        "mikey179/vfsstream": "^1.6",
-        "phpunit/phpunit": "^9.0",
         "phpspec/prophecy-phpunit": "^2.0",
+        "phpunit/phpunit": "^9.5",
         "sebastian/phpcpd": "^6.0",
-        "squizlabs/php_codesniffer": "^3.0"
+        "squizlabs/php_codesniffer": "^3.0",
+        "mikey179/vfsstream": "^1.6",
+        "symfony/phpunit-bridge": "4.4.*"
     },
     "autoload": {
         "psr-4": {
-            "Islandora\\Crayfish\\Commons\\": "src/"
+            "Islandora\\Crayfish\\Commons\\": ""
         }
     },
     "scripts": {
         "check": [
-            "vendor/bin/phpcs --standard=PSR2 src tests",
-            "vendor/bin/phpcpd --suffix *.php src tests"
+            "./vendor/bin/phpcs --standard=PSR2 --extensions=php --ignore=\"vendor/\" .",
+            "./vendor/bin/phpcpd --suffix *.php --exclude vendor . "
         ],
         "test": [
             "@check",
-            "vendor/bin/phpunit"
+            "php ./vendor/bin/simple-phpunit"
         ]
+    },
+    "conflict": {
+        "symfony/symfony": "*"
+    },
+    "extra": {
+        "symfony": {
+            "allow-contrib": false,
+            "require": "4.4.*"
+        }
     },
     "license": "MIT",
     "authors": [

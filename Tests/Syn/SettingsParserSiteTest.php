@@ -1,17 +1,13 @@
 <?php
 
-namespace Islandora\Crayfish\Commons\Syn\tests;
+namespace Islandora\Crayfish\Commons\Tests\Syn;
 
 use Islandora\Crayfish\Commons\Syn\SettingsParser;
+use Islandora\Crayfish\Commons\Tests\AbstractCrayfishCommonsTestCase;
 use org\bovigo\vfs\vfsStream;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Psr\Log\AbstractLogger;
-use PHPUnit\Framework\TestCase;
 
-class SettingsParserSiteTest extends TestCase
+class SettingsParserSiteTest extends AbstractCrayfishCommonsTestCase
 {
-
-    use ProphecyTrait;
 
     public function testInvalidVersion()
     {
@@ -22,8 +18,7 @@ class SettingsParserSiteTest extends TestCase
   </site>
 </config>
 STRING;
-        $logger = $this->prophesize(AbstractLogger::class)->reveal();
-        $parser = new SettingsParser($testXml, $logger);
+        $parser = new SettingsParser($testXml, $this->logger);
         $sites = $parser->getSites();
         $this->assertEquals(0, count($sites));
     }
@@ -37,8 +32,7 @@ STRING;
   </site>
 </config>
 STRING;
-        $logger = $this->prophesize(AbstractLogger::class)->reveal();
-        $parser = new SettingsParser($testXml, $logger);
+        $parser = new SettingsParser($testXml, $this->logger);
         $sites = $parser->getSites();
         $this->assertEquals(1, count($sites));
         $this->assertTrue(isset($sites['http://test.com']));
@@ -63,8 +57,7 @@ STRING;
   </site>
 </config>
 STRING;
-        $logger = $this->prophesize(AbstractLogger::class)->reveal();
-        $parser = new SettingsParser($testXml, $logger);
+        $parser = new SettingsParser($testXml, $this->logger);
         $sites = $parser->getSites();
         $this->assertEquals(1, count($sites));
         $this->assertTrue(isset($sites['http://test.com']));
@@ -82,8 +75,7 @@ STRING;
   </site>
 </config>
 STRING;
-        $logger = $this->prophesize(AbstractLogger::class)->reveal();
-        $parser = new SettingsParser($testXml, $logger);
+        $parser = new SettingsParser($testXml, $this->logger);
         $sites = $parser->getSites();
         $this->assertEquals(0, count($sites));
     }
@@ -97,8 +89,7 @@ STRING;
   </site>
 </config>
 STRING;
-        $logger = $this->prophesize(AbstractLogger::class)->reveal();
-        $parser = new SettingsParser($testXml, $logger);
+        $parser = new SettingsParser($testXml, $this->logger);
         $sites = $parser->getSites();
         $this->assertEquals(0, count($sites));
     }
@@ -114,8 +105,7 @@ STRING;
   <site url='http://test.com' algorithm='HS256' encoding='plain' path="$file"/>
 </config>
 STRING;
-        $logger = $this->prophesize(AbstractLogger::class)->reveal();
-        $parser = new SettingsParser($testXml, $logger);
+        $parser = new SettingsParser($testXml, $this->logger);
         $sites = $parser->getSites();
         $this->assertEquals(1, count($sites));
         $this->assertTrue(isset($sites['http://test.com']));
@@ -132,8 +122,7 @@ STRING;
   <site url='http://test.com' algorithm='HS256' encoding='plain' path="$file"/>
 </config>
 STRING;
-        $logger = $this->prophesize(AbstractLogger::class)->reveal();
-        $parser = new SettingsParser($testXml, $logger);
+        $parser = new SettingsParser($testXml, $this->logger);
         $sites = $parser->getSites();
         $this->assertEquals(0, count($sites));
     }
@@ -145,8 +134,7 @@ STRING;
   <site url='http://test.com' algorithm='HS256' encoding='plain'/>
 </config>
 STRING;
-        $logger = $this->prophesize(AbstractLogger::class)->reveal();
-        $parser = new SettingsParser($testXml, $logger);
+        $parser = new SettingsParser($testXml, $this->logger);
         $sites = $parser->getSites();
         $this->assertEquals(0, count($sites));
     }
@@ -160,8 +148,7 @@ STRING;
   </site>
 </config>
 STRING;
-        $logger = $this->prophesize(AbstractLogger::class)->reveal();
-        $parser = new SettingsParser($testXml, $logger);
+        $parser = new SettingsParser($testXml, $this->logger);
         $sites = $parser->getSites();
         $this->assertEquals(0, count($sites));
     }
@@ -175,8 +162,7 @@ STRING;
   </site>
 </config>
 STRING;
-        $logger = $this->prophesize(AbstractLogger::class)->reveal();
-        $parser = new SettingsParser($testXml, $logger);
+        $parser = new SettingsParser($testXml, $this->logger);
         $sites = $parser->getSites();
         $this->assertEquals(1, count($sites));
     }
@@ -190,8 +176,7 @@ STRING;
   </site>
 </config>
 STRING;
-        $logger = $this->prophesize(AbstractLogger::class)->reveal();
-        $parser = new SettingsParser($testXml, $logger);
+        $parser = new SettingsParser($testXml, $this->logger);
         $sites = $parser->getSites();
         $this->assertEquals(0, count($sites));
     }
@@ -210,8 +195,7 @@ KOT4nEF7MBGyOSP3KQIDAQAB
   </site>
 </config>
 STRING;
-        $logger = $this->prophesize(AbstractLogger::class)->reveal();
-        $parser = new SettingsParser($testXml, $logger);
+        $parser = new SettingsParser($testXml, $this->logger);
         $sites = $parser->getSites();
         $this->assertEquals(1, count($sites));
         $this->assertTrue(isset($sites['http://test.com']));
@@ -235,8 +219,7 @@ STRING;
   </site>
 </config>
 STRING;
-        $logger = $this->prophesize(AbstractLogger::class)->reveal();
-        $parser = new SettingsParser($testXml, $logger);
+        $parser = new SettingsParser($testXml, $this->logger);
         $sites = $parser->getSites();
         $this->assertEquals(0, count($sites));
     }
@@ -255,8 +238,7 @@ KOT4nEF7MBGyOSP3KQIDAQAB
   </site>
 </config>
 STRING;
-        $logger = $this->prophesize(AbstractLogger::class)->reveal();
-        $parser = new SettingsParser($testXml, $logger);
+        $parser = new SettingsParser($testXml, $this->logger);
         $sites = $parser->getSites();
         $this->assertEquals(0, count($sites));
     }
@@ -265,8 +247,7 @@ STRING;
     {
         $testXml =  <<<STRING
 STRING;
-        $logger = $this->prophesize(AbstractLogger::class)->reveal();
-        $parser = new SettingsParser($testXml, $logger);
+        $parser = new SettingsParser($testXml, $this->logger);
         $sites = $parser->getSites();
         $this->assertEquals(0, count($sites));
     }
@@ -276,8 +257,7 @@ STRING;
         $testXml =  <<<STRING
 <foo></foo>
 STRING;
-        $logger = $this->prophesize(AbstractLogger::class)->reveal();
-        $parser = new SettingsParser($testXml, $logger);
+        $parser = new SettingsParser($testXml, $this->logger);
         $sites = $parser->getSites();
         $this->assertEquals(0, count($sites));
     }

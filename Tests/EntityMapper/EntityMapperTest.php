@@ -1,15 +1,12 @@
 <?php
 
-namespace Islandora\Crayfish\Commons\tests;
+namespace Islandora\Crayfish\Commons\Tests\EntityMapper;
 
 use Islandora\Crayfish\Commons\EntityMapper\EntityMapper;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Argument;
 use PHPUnit\Framework\TestCase;
 
 class EntityMapperTest extends TestCase
 {
-    use ProphecyTrait;
 
     public function testGetFedoraPath()
     {
