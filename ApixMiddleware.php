@@ -62,6 +62,10 @@ class ApixMiddleware implements EventSubscriberInterface
         if (!$request->headers->has("Apix-Ldp-Resource")) {
             $this->log->debug("No Apix-Ldp-Resource header present, no fedora_resource set");
             $request->attributes->set('fedora_resource', false);
+            $event->setResponse(new Response(
+                "Malformed request, no Apix-Ldp-Resource header present",
+                400
+            ));
             return;
         }
 
