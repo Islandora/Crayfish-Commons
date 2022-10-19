@@ -348,23 +348,23 @@
         },
         {
             "name": "islandora/chullo",
-            "version": "1.2.0",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Islandora/chullo.git",
-                "reference": "d563d5e48ef9b15dcf45029277bbc2f6eeef2454"
+                "reference": "a7c1e051eab2a5077eaf5db2649201fa775c5a02"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Islandora/chullo/zipball/d563d5e48ef9b15dcf45029277bbc2f6eeef2454",
-                "reference": "d563d5e48ef9b15dcf45029277bbc2f6eeef2454",
+                "url": "https://api.github.com/repos/Islandora/chullo/zipball/a7c1e051eab2a5077eaf5db2649201fa775c5a02",
+                "reference": "a7c1e051eab2a5077eaf5db2649201fa775c5a02",
                 "shasum": ""
             },
             "require": {
                 "easyrdf/easyrdf": "^0.9 || ^1",
                 "guzzlehttp/guzzle": "^6.1.0",
                 "ml/json-ld": "^1.0.4",
-                "php": "^7.3 || ^7.4"
+                "php": ">=7.3"
             },
             "require-dev": {
                 "mockery/mockery": "^0.9",
@@ -403,9 +403,9 @@
             "homepage": "https://github.com/Islandora/chullo",
             "support": {
                 "issues": "https://github.com/Islandora/documentation/issues",
-                "source": "https://github.com/Islandora/chullo/tree/1.2.0"
+                "source": "https://github.com/Islandora/chullo/tree/1.3.0"
             },
-            "time": "2021-05-05T17:38:36+00:00"
+            "time": "2021-12-16T22:31:48+00:00"
         },
         {
             "name": "ml/iri",
@@ -5976,5 +5976,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.3.0"
 }
