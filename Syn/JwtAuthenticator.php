@@ -77,8 +77,8 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
         return [
             'token' => $token,
             'jwt' => $jwt,
-            'name' => $payload['sub'] ?? NULL,
-            'roles' => $payload['roles'] ?? NULL,
+            'name' => $payload['sub'] ?? null,
+            'roles' => $payload['roles'] ?? null,
         ];
     }
 
