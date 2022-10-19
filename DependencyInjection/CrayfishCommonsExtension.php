@@ -34,8 +34,7 @@ class CrayfishCommonsExtension extends Extension
         if (!$container->has('Islandora\Crayfish\Commons\Syn\SettingsParser')) {
             if (file_exists($config['syn_config'])) {
                 $xml = file_get_contents($config['syn_config']);
-            }
-            else {
+            } else {
                 throw new IOException("Security configuration not found. ${config['syn_config']}");
             }
 
