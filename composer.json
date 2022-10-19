@@ -33,12 +33,12 @@
     },
     "scripts": {
         "check": [
-            "./vendor/bin/phpcs --standard=PSR2 --extensions=php --ignore=\"vendor/\" .",
-            "./vendor/bin/phpcpd --suffix *.php --exclude vendor . "
+            "phpcs --standard=PSR2 --extensions=php --ignore=\"vendor/\" .",
+            "phpcpd --suffix *.php --exclude vendor . "
         ],
         "test": [
             "@check",
-            "php ./vendor/bin/simple-phpunit"
+            "simple-phpunit"
         ]
     },
     "conflict": {
