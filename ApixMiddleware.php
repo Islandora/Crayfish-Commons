@@ -3,6 +3,7 @@
 namespace Islandora\Crayfish\Commons;
 
 use Islandora\Chullo\IFedoraApi;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,12 +22,12 @@ class ApixMiddleware implements EventSubscriberInterface
     /**
      * @var \Islandora\Chullo\IFedoraApi
      */
-    protected $api;
+    protected IFedoraApi $api;
 
     /**
      * @var null|\Psr\Log\LoggerInterface
      */
-    protected $log;
+    protected ?LoggerInterface $log;
 
     /**
      * ApixFedoraResourceRetriever constructor.
@@ -42,7 +43,7 @@ class ApixMiddleware implements EventSubscriberInterface
     }
 
     /**
-     *
+     * The steps to take when a subscribed request comes in.
      * @param \Symfony\Component\HttpKernel\Event\RequestEvent $event
      */
     public function before(RequestEvent $event)
@@ -91,7 +92,12 @@ class ApixMiddleware implements EventSubscriberInterface
         $request->attributes->set('fedora_resource', $fedora_resource);
     }
 
-    protected function getFedoraResource(Request $request)
+    /**
+     * Get the Fedora Resource defined in the Request.
+     * @param \Symfony\Component\HttpFoundation\Request $request The request.
+     * @return \Psr\Http\Message\ResponseInterface The response with the resource.
+     */
+    protected function getFedoraResource(Request $request): ResponseInterface
     {
         // Pass along auth headers if present.
         $headers = [];
@@ -108,9 +114,9 @@ class ApixMiddleware implements EventSubscriberInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             KernelEvents::REQUEST => [

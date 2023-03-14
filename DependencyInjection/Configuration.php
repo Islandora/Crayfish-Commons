@@ -9,7 +9,7 @@ class Configuration implements ConfigurationInterface
 {
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getConfigTreeBuilder()
     {
@@ -18,7 +18,7 @@ class Configuration implements ConfigurationInterface
         $root->addDefaultsIfNotSet()
             ->children()
             ->scalarNode('fedora_base_uri')->cannotBeEmpty()->defaultValue('http://localhost:8080/fcrepo/rest')->end()
-            ->scalarNode('syn_config')->defaultValue(__DIR__ . '/../Resources/default_syn.xml')->end()
+            ->booleanNode('apix_middleware_enabled')->defaultTrue()->end()
         ->end();
 
         return $treeBuilder;
