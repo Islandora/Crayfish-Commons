@@ -12,11 +12,11 @@
         "namshi/jose": "^7.2",
         "symfony/monolog-bundle": "^3.4",
         "symfony/http-foundation": "4.4.*",
-        "symfony/config": "4.4.*",
-        "symfony/dependency-injection": "4.4.*",
-        "symfony/event-dispatcher": "4.4.*",
+        "symfony/config": "^5.4",
+        "symfony/dependency-injection": "^5.4 || ^6",
+        "symfony/event-dispatcher": "^5.1",
         "symfony/yaml": "4.4.*",
-        "symfony/security-bundle": "4.4.*"
+        "symfony/security-bundle": ">=5.0.95"
     },
     "require-dev": {
         "phpspec/prophecy-phpunit": "^2.0",
