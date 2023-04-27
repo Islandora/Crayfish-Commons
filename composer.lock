@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2c6c11753d5c2f3ed11c6a161d07643c",
+    "content-hash": "4f5d276322caf87cea46da2b310fade2",
     "packages": [
         {
             "name": "easyrdf/easyrdf",
@@ -411,16 +411,16 @@
         },
         {
             "name": "islandora/chullo",
-            "version": "dev-update-dependencies",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Islandora/chullo.git",
-                "reference": "aa1c8053f4cac9805a936d3deb08c2b9c549f661"
+                "reference": "623d82eb37c8bfa023227bf0e4487157d4d394be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Islandora/chullo/zipball/aa1c8053f4cac9805a936d3deb08c2b9c549f661",
-                "reference": "aa1c8053f4cac9805a936d3deb08c2b9c549f661",
+                "url": "https://api.github.com/repos/Islandora/chullo/zipball/623d82eb37c8bfa023227bf0e4487157d4d394be",
+                "reference": "623d82eb37c8bfa023227bf0e4487157d4d394be",
                 "shasum": ""
             },
             "require": {
@@ -466,9 +466,9 @@
             "homepage": "https://github.com/Islandora/chullo",
             "support": {
                 "issues": "https://github.com/Islandora/documentation/issues",
-                "source": "https://github.com/Islandora/chullo/tree/update-dependencies"
+                "source": "https://github.com/Islandora/chullo/tree/2.0.0"
             },
-            "time": "2023-04-18T19:55:31+00:00"
+            "time": "2023-04-26T21:18:26+00:00"
         },
         {
             "name": "ml/iri",
@@ -3310,16 +3310,16 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "1.19.1",
+            "version": "1.20.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "f545fc30978190a056832aa7ed995e36a66267f3"
+                "reference": "6c04009f6cae6eda2f040745b6b846080ef069c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/f545fc30978190a056832aa7ed995e36a66267f3",
-                "reference": "f545fc30978190a056832aa7ed995e36a66267f3",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/6c04009f6cae6eda2f040745b6b846080ef069c2",
+                "reference": "6c04009f6cae6eda2f040745b6b846080ef069c2",
                 "shasum": ""
             },
             "require": {
@@ -3349,9 +3349,9 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.19.1"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.20.3"
             },
-            "time": "2023-04-18T11:30:56+00:00"
+            "time": "2023-04-25T09:01:03+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -5051,9 +5051,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "islandora/chullo": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

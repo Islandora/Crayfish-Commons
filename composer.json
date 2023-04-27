@@ -7,7 +7,7 @@
         "issues": "https://github.com/Islandora/documentation/issues"
     },
     "require": {
-        "islandora/chullo": "dev-update-dependencies",
+        "islandora/chullo": "^2.0",
         "psr/log": "^1.0.1",
         "namshi/jose": "^7.2",
         "symfony/monolog-bundle": "^3.4",
