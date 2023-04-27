@@ -7,23 +7,21 @@
         "issues": "https://github.com/Islandora/documentation/issues"
     },
     "require": {
-        "islandora/chullo": "^1.0",
+        "islandora/chullo": "^2.0",
         "psr/log": "^1.0.1",
         "namshi/jose": "^7.2",
         "symfony/monolog-bundle": "^3.4",
-        "symfony/http-foundation": "4.4.*",
-        "symfony/config": "4.4.*",
-        "symfony/dependency-injection": "4.4.*",
-        "symfony/event-dispatcher": "4.4.*",
-        "symfony/yaml": "4.4.*",
-        "symfony/security-bundle": "4.4.*"
+        "symfony/http-foundation": "5.4.*",
+        "symfony/config": "5.4.*",
+        "symfony/dependency-injection": "5.4.*",
+        "symfony/event-dispatcher": "5.4.*"
     },
     "require-dev": {
         "phpspec/prophecy-phpunit": "^2.0",
         "sebastian/phpcpd": "^6.0",
         "squizlabs/php_codesniffer": "^3.0",
         "mikey179/vfsstream": "^1.6",
-        "symfony/phpunit-bridge": "4.4.*"
+        "symfony/phpunit-bridge": "5.4.*"
     },
     "autoload": {
         "psr-4": {
@@ -46,7 +44,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "4.4.*"
+            "require": "5.4.*"
         }
     },
     "license": "MIT",

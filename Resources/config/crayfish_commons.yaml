@@ -9,9 +9,6 @@ services:
   # Other services are loaded in the CrayfishCommonsExtension class.
   Islandora\Crayfish\Commons\CmdExecuteService: ~
 
-  Islandora\Crayfish\Commons\EntityMapper\:
-    resource: '../../EntityMapper/*'
-
   Islandora\Crayfish\Commons\ApixMiddleware:
     tags:
     - { name: kernel.event_subscriber, event: kernel.request }
@@ -20,6 +17,3 @@ services:
   # in CrayfishCommonsExtension class
   crayfish.cmd_execute_service:
     alias: Islandora\Crayfish\Commons\CmdExecuteService
-
-  # Map the concrete class to the interface.
-  Islandora\Crayfish\Commons\EntityMapper\EntityMapperInterface: '@Islandora\Crayfish\Commons\EntityMapper\EntityMapper'

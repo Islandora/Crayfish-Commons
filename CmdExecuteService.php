@@ -13,18 +13,20 @@ class CmdExecuteService
 {
 
     /**
+     * The logger.
      * @var null|\Psr\Log\LoggerInterface
      */
-    protected $log;
+    protected ?LoggerInterface $log;
 
     /**
+     * The output stream resource.
      * @var resource
      */
     protected $output;
 
     /**
      * Executor constructor.
-     * @param LoggerInterface $log
+     * @param \Psr\Log\LoggerInterface|null $log
      */
     public function __construct(LoggerInterface $log = null)
     {
@@ -52,7 +54,7 @@ class CmdExecuteService
      * @return \Closure
      *   Closure that streams the output of the command.
      */
-    public function execute($cmd, $data)
+    public function execute($cmd, $data): \Closure
     {
         // Use pipes for STDIN, STDOUT, and STDERR
         $descr = array(
@@ -132,7 +134,7 @@ class CmdExecuteService
         };
     }
 
-    protected function cleanup($pipes, $process)
+    protected function cleanup($pipes, $process): void
     {
         // Close STDERR
         fclose($pipes[2]);
