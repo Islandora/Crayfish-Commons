@@ -2,14 +2,12 @@
 
 namespace Islandora\Crayfish\Commons\Tests;
 
-use GuzzleHttp\Psr7\Stream;
 use Islandora\Chullo\IFedoraApi;
 use Islandora\Crayfish\Commons\ApixMiddleware;
-use Psr\Http\Message\ResponseInterface;
 use Prophecy\Argument;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
@@ -33,7 +31,7 @@ class ApixMiddlewareTest extends AbstractCrayfishCommonsTestCase
         // Mock a Fedora response.
         $prophecy = $this->prophesize(ResponseInterface::class);
         $prophecy->getBody()->willReturn($this->prophesize(StreamInterface::class)->reveal());
-        $prophecy->getHeaders()->willReturn();
+        $prophecy->getHeaders()->willReturn([]);
         $prophecy->getStatusCode()->willReturn(401);
         $prophecy->getReasonPhrase()->willReturn("Unauthorized");
         $mock_fedora_response = $prophecy->reveal();
