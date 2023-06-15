@@ -29,7 +29,8 @@ class CrayfishCommonsExtension extends Extension
                 ->setArgument('$fedora_rest_url', $config['fedora_base_uri']);
             $container->setAlias('Islandora\Chullo\FedoraApi', 'Islandora\Chullo\IFedoraApi');
         }
-        if ($config['apix_middleware_enabled'] === false && $container->has('Islandora\Crayfish\Commons\ApixMiddleware')) {
+        if ($config['apix_middleware_enabled'] === false &&
+            $container->has('Islandora\Crayfish\Commons\ApixMiddleware')) {
             $container->removeDefinition('Islandora\Crayfish\Commons\ApixMiddleware');
         }
     }
