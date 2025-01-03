@@ -2,7 +2,7 @@
 ![Crayfish](https://user-images.githubusercontent.com/2371345/48163075-11c6cf80-e2b5-11e8-8b5b-991b366014a5.png)
 # Crayfish Commons
 
-[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.4-8892BF.svg?style=flat-square)](https://php.net/)
+[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%208.0-8892BF.svg?style=flat-square)](https://php.net/)
 [![Build Status](https://github.com/islandora/crayfish-commons/actions/workflows/build-2.x.yml/badge.svg)](https://github.com/Islandora/crayfish-commons/actions)
 [![Contribution Guidelines](http://img.shields.io/badge/CONTRIBUTING-Guidelines-blue.svg)](./CONTRIBUTING.md)
 [![LICENSE](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](./LICENSE)
@@ -18,7 +18,7 @@ Shared Classes include:
 
 ## Requirements
 
-* PHP 7.4+
+* PHP 8.0+
 * [Composer](https://getcomposer.org/)
 
 ## Installation

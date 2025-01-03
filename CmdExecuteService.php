@@ -74,7 +74,10 @@ class CmdExecuteService
         $pipes = [];
 
         // Start process, telling it to use STDIN for input and STDOUT for output.
-        $cmd = escapeshellcmd($cmd);
+        $cmd = match (gettype($cmd)) {
+            'array' => $cmd,
+            default => escapeshellcmd($cmd),
+        };
         $process = proc_open($cmd, $descr, $pipes);
 
         // Get the data into pipe only if data is resource
