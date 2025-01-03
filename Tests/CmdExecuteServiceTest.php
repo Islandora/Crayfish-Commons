@@ -7,7 +7,25 @@ use Islandora\Crayfish\Commons\CmdExecuteService;
 class CmdExecuteServiceTest extends AbstractCrayfishCommonsTestCase
 {
 
-    public function testExecuteWithResource()
+    public function dataProviderWithResource()
+    {
+        return [
+            'test as string' => [
+                'sort -',
+            ],
+            'test as array' => [
+                [
+                    'sort',
+                    '-',
+                ],
+            ]
+        ];
+    }
+
+    /**
+     * @dataProvider dataProviderWithResource
+     */
+    public function testExecuteWithResource(string|array $command)
     {
         $service = new CmdExecuteService($this->logger);
 
@@ -15,8 +33,6 @@ class CmdExecuteServiceTest extends AbstractCrayfishCommonsTestCase
         $data = fopen('php://memory', 'r+');
         fwrite($data, $string);
         rewind($data);
-
-        $command = 'sort -';
 
         $callback = $service->execute($command, $data);
 
@@ -36,11 +52,28 @@ class CmdExecuteServiceTest extends AbstractCrayfishCommonsTestCase
         $callback();
     }
 
-    public function testExecuteWithoutResource()
+    public function dataProviderWithoutResource()
+    {
+        return [
+          'test as string' => [
+            'echo "derp"',
+          ],
+          'test as array' => [
+            [
+              'echo',
+              'derp',
+            ],
+          ]
+        ];
+    }
+
+    /**
+     * @dataProvider dataProviderWithoutResource
+     */
+    public function testExecuteWithoutResource(string|array $command)
     {
         $service = new CmdExecuteService($this->logger);
 
-        $command = 'echo "derp"';
         $callback = $service->execute($command, "");
 
         $this->assertTrue(is_callable($callback), "execute() must return a callable.");
