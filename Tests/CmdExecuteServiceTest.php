@@ -3,11 +3,12 @@
 namespace Islandora\Crayfish\Commons\Tests;
 
 use Islandora\Crayfish\Commons\CmdExecuteService;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class CmdExecuteServiceTest extends AbstractCrayfishCommonsTestCase
 {
 
-    public function dataProviderWithResource()
+    public static function dataProviderWithResource(): array
     {
         return [
             'test as string' => [
@@ -22,9 +23,7 @@ class CmdExecuteServiceTest extends AbstractCrayfishCommonsTestCase
         ];
     }
 
-    /**
-     * @dataProvider dataProviderWithResource
-     */
+    #[DataProvider('dataProviderWithResource')]
     public function testExecuteWithResource(string|array $command)
     {
         $service = new CmdExecuteService($this->logger);
@@ -52,7 +51,7 @@ class CmdExecuteServiceTest extends AbstractCrayfishCommonsTestCase
         $callback();
     }
 
-    public function dataProviderWithoutResource()
+    public static function dataProviderWithoutResource(): array
     {
         return [
           'test as string' => [
@@ -67,9 +66,7 @@ class CmdExecuteServiceTest extends AbstractCrayfishCommonsTestCase
         ];
     }
 
-    /**
-     * @dataProvider dataProviderWithoutResource
-     */
+    #[DataProvider('dataProviderWithoutResource')]
     public function testExecuteWithoutResource(string|array $command)
     {
         $service = new CmdExecuteService($this->logger);

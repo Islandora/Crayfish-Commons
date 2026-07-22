@@ -8,20 +8,22 @@
     },
     "require": {
         "islandora/chullo": "^2.0",
-        "psr/log": "^1.0.1",
-        "namshi/jose": "^7.2",
-        "symfony/monolog-bundle": "^3.4",
-        "symfony/http-foundation": "5.4.*",
-        "symfony/config": "5.4.*",
-        "symfony/dependency-injection": "5.4.*",
-        "symfony/event-dispatcher": "5.4.*"
+        "php": "^8.4.1",
+        "psr/http-message": "^2.0",
+        "psr/log": "^3.0",
+        "symfony/config": "8.1.*",
+        "symfony/dependency-injection": "8.1.*",
+        "symfony/event-dispatcher": "8.1.*",
+        "symfony/http-foundation": "8.1.*",
+        "symfony/http-kernel": "8.1.*",
+        "symfony/monolog-bundle": "^4.0",
+        "symfony/yaml": "8.1.*"
     },
     "require-dev": {
-        "phpspec/prophecy-phpunit": "^2.0",
-        "sebastian/phpcpd": "^6.0",
-        "squizlabs/php_codesniffer": "^3.0",
-        "mikey179/vfsstream": "^1.6",
-        "symfony/phpunit-bridge": "5.4.*"
+        "phpspec/prophecy-phpunit": "^2.5",
+        "phpunit/phpunit": "^12.5",
+        "squizlabs/php_codesniffer": "^3.13",
+        "symfony/phpunit-bridge": "8.1.*"
     },
     "autoload": {
         "psr-4": {
@@ -30,13 +32,13 @@
     },
     "scripts": {
         "check": [
-            "phpcs --standard=PSR2 --extensions=php --ignore=\"vendor/\" .",
-            "phpcpd --suffix *.php --exclude vendor . "
+            "phpcs --standard=PSR2 --extensions=php --ignore=\"vendor/\" ."
         ],
         "test": [
             "@check",
-            "simple-phpunit"
-        ]
+            "phpunit"
+        ],
+        "coverage": "phpunit --coverage-clover clover.xml"
     },
     "conflict": {
         "symfony/symfony": "*"
@@ -44,7 +46,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "5.4.*"
+            "require": "8.1.*"
         }
     },
     "license": "MIT",

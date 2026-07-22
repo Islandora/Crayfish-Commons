@@ -54,7 +54,7 @@ class ApixMiddlewareTest extends AbstractCrayfishCommonsTestCase
         $request->headers->set('Authorization', 'some_token');
         $request->headers->set('Apix-Ldp-Resource', 'http://localhost:8080/fcrepo/rest/foo');
 
-        $request_event = new RequestEvent($kernel, $request, HttpKernelInterface::MASTER_REQUEST);
+        $request_event = new RequestEvent($kernel, $request, HttpKernelInterface::MAIN_REQUEST);
 
         // Test before().
         $middleware->before($request_event);
@@ -96,7 +96,7 @@ class ApixMiddlewareTest extends AbstractCrayfishCommonsTestCase
             "GET"
         );
 
-        $request_event = new RequestEvent($kernel, $request, HttpKernelInterface::MASTER_REQUEST);
+        $request_event = new RequestEvent($kernel, $request, HttpKernelInterface::MAIN_REQUEST);
 
         // Test before().
         $middleware->before($request_event);
