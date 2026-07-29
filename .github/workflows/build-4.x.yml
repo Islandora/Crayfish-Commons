@@ -23,7 +23,7 @@ jobs:
         with:
           php-version: "8.4"
           tools: composer:v2
-          coverage: xdebug
+          coverage: none
 
       - name: Validate Composer configuration
         run: composer validate --strict --no-check-publish
@@ -37,13 +37,5 @@ jobs:
       - name: Check coding standards
         run: composer check
 
-      - name: Test with coverage
-        run: composer coverage
-        env:
-          XDEBUG_MODE: coverage
-
-      - name: Upload coverage
-        uses: codecov/codecov-action@04b047e8bb82a0c002c8312c1c880fbc6a999d45 # v5
-        with:
-          files: clover.xml
-          fail_ci_if_error: true
+      - name: Test
+        run: vendor/bin/phpunit

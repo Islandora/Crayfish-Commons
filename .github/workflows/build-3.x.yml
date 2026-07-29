@@ -69,7 +69,3 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE/build_dir
           composer test
-
-      - name: Codecov
-        uses: codecov/codecov-action@v1
-

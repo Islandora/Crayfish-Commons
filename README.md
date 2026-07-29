@@ -6,7 +6,6 @@
 [![Build Status](https://github.com/islandora/crayfish-commons/actions/workflows/build-4.x.yml/badge.svg)](https://github.com/Islandora/crayfish-commons/actions)
 [![Contribution Guidelines](http://img.shields.io/badge/CONTRIBUTING-Guidelines-blue.svg)](./CONTRIBUTING.md)
 [![LICENSE](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](./LICENSE)
-[![codecov](https://codecov.io/gh/Islandora/Crayfish-Commons/branch/4.x/graphs/badge.svg?branch=4.x)](https://codecov.io/gh/Islandora/Crayfish-Commons)
 
 
 ## Introduction
@@ -74,4 +73,3 @@ We recommend using the [islandora-playbook](https://github.com/Islandora-Devops/
 ## License
 
 [MIT](./LICENSE)
-
